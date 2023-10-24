@@ -8,7 +8,7 @@ class TopicInfo:
     topic_id: str
     topic_title: str
     topic_content: str
-    topic_annex: str
+    topic_annex: list
     topic_state: int
     topic_create_time: str
     topic_creator_user_id: str

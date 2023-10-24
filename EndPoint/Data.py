@@ -1,4 +1,5 @@
 import json
+import uuid
 from types import SimpleNamespace
 
 import certifi
@@ -21,7 +22,7 @@ firebase_admin.initialize_app(cred_obj, {
 })
 
 db_ref = db.reference('/server/data')
-bucket = storage.bucket()
+# bucket = storage.bucket()
 
 
 def to_json(data):
@@ -52,3 +53,18 @@ def getCommentInfoById(userId: str):
 
 def getInfo(ID: str, type_name):
     return db_ref.child(type_name).child(ID).get()
+
+
+def uploadFile(filePath):
+    fileId = uuid.uuid1()
+    return fileId
+
+
+def upload_blob(bucket_name, source_file_name, destination_blob_name):
+    bucket = storage.bucket(bucket_name)
+    blob = bucket.blob(destination_blob_name)
+    generation_match_precondition = 0
+    blob.upload_from_filename(source_file_name, if_generation_match=generation_match_precondition)
+    print(
+        f"File {source_file_name} uploaded to {destination_blob_name}."
+    )

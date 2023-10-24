@@ -2,8 +2,6 @@ import json
 from time import time
 from faker import Faker
 
-from EndPoint.Encode import MyEncoder
-
 
 class UserInfo:
     type_name = 'userInfo'
@@ -14,7 +12,7 @@ class UserInfo:
     user_password: str
     user_email: str
     user_auth_role: str
-    user_head_portrait: str
+    user_head_portrait: list
     user_create_time: str
     user_follow_topic_list: list
 
