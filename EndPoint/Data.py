@@ -1,19 +1,16 @@
-import json
 import uuid
-from types import SimpleNamespace
-
 import certifi
 import os
+import base64
 
 from EndPoint.ForumData.CommentInfo import CommentInfo
 from EndPoint.ForumData.PostInfo import PostInfo
 from EndPoint.ForumData.UserInfo import UserInfo
 
-os.environ['SSL_CERT_FILE'] = certifi.where()
-
 import firebase_admin
 from firebase_admin import db, storage
-from google.cloud.storage import transfer_manager
+
+os.environ['SSL_CERT_FILE'] = certifi.where()
 
 cred_obj = firebase_admin.credentials.Certificate('json/token.json')
 
@@ -86,23 +83,26 @@ def uploadFile(filePath):
 def upload_blob(filePath, fileId):
     fileName = os.path.basename(filePath)
     blob = bucket.blob(str(fileId) + '/' + fileName)
-    print(str(fileId) + '/' + fileName)
+    # print(str(fileId) + '/' + fileName)
+    path = str(fileId) + '/' + fileName
     blob.upload_from_filename(filePath)
     blob.make_public()
-    return blob.public_url
+    return path, blob.public_url
 
-# todo 完善多文件上传
-def upload_many_blobs_with_transfer_manager(filenames, source_directory="", processes=8
-):
-    results = transfer_manager.upload_many_from_filenames(
-        bucket, filenames, source_directory=source_directory, max_workers=processes
-    )
 
-    for name, result in zip(filenames, results):
-        # The results list is either `None` or an exception for each filename in
-        # the input list, in order.
+def downloadFile(downLoadFilePath, saveFilePath):
+    blob = bucket.blob(downLoadFilePath)
+    blob.download_to_filename(saveFilePath)
+    print(f"download successful,{saveFilePath}")
 
-        if isinstance(result, Exception):
-            print("Failed to upload {} due to exception: {}".format(name, result))
-        else:
-            print("Uploaded {} to {}.".format(name, bucket.name))
+
+def deleteFile(deleteFilePath):
+    blob = bucket.blob(deleteFilePath)
+
+    try:
+        blob.delete()
+        print(f'{deleteFilePath} is deleted')
+    except:
+        print(f'The target file {deleteFilePath} does not exist.')
+
+

@@ -2,6 +2,8 @@ import json
 from time import time
 from faker import Faker
 
+from EndPoint import Encryption
+
 
 class UserInfo:
     type_name = 'userInfo'
@@ -24,12 +26,12 @@ class UserInfo:
             self.id = faker.uuid4()
             self.user_name = faker.name_female()
             self.user_nick_name = faker.user_name()
-            self.user_password = faker.password()
+            self.user_password = str(Encryption.des_encrypt(faker.password()))
             self.user_email = faker.email()
             self.user_auth_role = faker.numerify()
             self.user_head_portrait = faker.uri()
             self.user_create_time = str(faker.date_time())
-            self.user_follow_topic_list = [1, 2]
+            self.user_follow_topic_list = [faker.ssn(), faker.ssn()]
         return
 
     def getId(self):
