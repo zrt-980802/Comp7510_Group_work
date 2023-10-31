@@ -12,7 +12,7 @@ from firebase_admin import db, storage
 
 os.environ['SSL_CERT_FILE'] = certifi.where()
 
-cred_obj = firebase_admin.credentials.Certificate('json/token.json')
+cred_obj = firebase_admin.credentials.Certificate('source/json/token.json')
 
 firebase_admin.initialize_app(cred_obj, {
     'databaseURL': 'https://comp7510-934b1-default-rtdb.asia-southeast1.firebasedatabase.app/',
@@ -21,6 +21,7 @@ firebase_admin.initialize_app(cred_obj, {
 
 db_ref = db.reference('/server/data')
 bucket = storage.bucket()
+userIdNameRelationship = 'UINR'
 
 
 # def to_json(data):
@@ -30,9 +31,36 @@ bucket = storage.bucket()
 
 
 def setInfo(info):
-    data_ref = db_ref.child(info.type_name).child(info.getId())  # .set(to_json(info))
+    data_ref = db_ref.child(info.type_name).child(info.user_id)  # .set(to_json(info))
     for data in info.__dict__.items():
         data_ref.child(data[0]).set(data[1])
+
+
+def getUserIdAndUserNameRel(userName):
+    data_ref = db_ref.child(userIdNameRelationship).child(userName)
+    return data_ref.get()
+
+
+def setUserIdAndUserNameRel(userId, userName):
+    data_ref = db_ref.child(userIdNameRelationship).child(userName)
+    data_ref.set(userId)
+
+
+def deleteUserIdAndUserNameRel(userName):
+    data_ref = db_ref.child(userIdNameRelationship).child(userName)
+    data_ref.delete()
+
+
+def updateUserIdAndUserNameRel(userId, userName, oldUserName):
+    deleteUserIdAndUserNameRel(oldUserName)
+    setUserIdAndUserNameRel(userId, userName)
+
+
+def isUserNameExit(userName):
+    rela = getUserIdAndUserNameRel(userName)
+    if rela is None:
+        return [False]
+    return [True, rela]
 
 
 def updateInfo(info):
@@ -47,7 +75,11 @@ def getUserInfoById(userId: str):
     :param userId:
     :return: dict
     """
-    return getInfo(userId, UserInfo.type_name)
+    data = getInfo(userId, UserInfo.type_name)
+    userInfo = UserInfo()
+    userInfo.__dict__.update(data)
+    # print(userInfo.__dict__)
+    return userInfo
 
 
 def getPostInfoById(postId: str):
@@ -104,5 +136,3 @@ def deleteFile(deleteFilePath):
         print(f'{deleteFilePath} is deleted')
     except:
         print(f'The target file {deleteFilePath} does not exist.')
-
-

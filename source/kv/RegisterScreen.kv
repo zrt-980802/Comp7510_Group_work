@@ -1,0 +1,107 @@
+#: import * mandel_layouts
+<RegisterScreen>:
+    name: 'RegisterScreen'
+    canvas.before:
+        Color:
+            rgba: .2,.2,.5,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'source/pic/43916.jpg'
+
+    Column:
+        MDTopAppBar:
+            id: toolbar
+            left_action_items: [['chevron-left', lambda x: app.go_back()]]
+
+    Column:
+        halign: 'center'
+        valign: 'center'
+        padding: dp(100)
+        spacing: dp(20)
+
+
+        MDLabel:
+            id: label
+            text: 'Sign Up'
+            font_size: dp(40)
+            color: 1,1,1,1
+            halign: 'center'
+
+        ###Widget:
+        SignUpTextField:
+            id: user_name_field
+            hint_text: 'User Name'
+
+        SignUpTextField:
+            id: email_field
+            hint_text: 'Email'
+
+        SignUpTextField:
+            id: password_field
+            hint_text: 'Password'
+            password: True
+            helper_text: 'Note: At least 6 characters long but 14 or more.'
+            helper_text_mode: "on_focus"
+
+        SignUpTextField:
+            id: re_password_field
+            hint_text: 'Re-Password'
+            password: True
+
+        SignUpTextField:
+            id: phone_number_field
+            hint_text: 'Phone Number'
+
+        MDBoxLayout:
+            adaptive_height: True
+            orientation: 'horizontal'
+            Check:
+                active: False
+#                pos_hint: {'center_x': .4, 'center_y': .5}
+            MDLabel:
+                id: is_follow_register_rule
+                text: 'Comply with community unfair registration principles'
+                font_size: dp(10)
+                color: '#CFD8DC'
+                halign: 'center'
+
+        MDBoxLayout:
+            adaptive_height: True
+            orientation: 'horizontal'
+#            padding: dp(5)
+            spacing: dp(20)
+
+            MDRaisedButton:
+                text: "Register"
+                md_bg_color: "#42A5F5"
+                pos_hint: {'left': 1}
+                size_hint: (0.4,1)
+                on_press: root.register()
+
+            MDRaisedButton:
+                text: "Cancel"
+                md_bg_color: "#ABB2B9"
+                pos_hint: {'right': 1}
+                size_hint: (0.4,1)
+                on_press: root.cancel()
+
+            MDRaisedButton:
+                text: "Clear"
+                md_bg_color: "#ABB2B9"
+                on_press: root.clear()
+
+
+
+<SignUpTextField@MDTextField>
+    hint_text_color_normal: 1,1,1,.5
+    hint_text_color_focus: 1,1,1,1
+    line_color_normal: 1,1,1,.5
+    line_color_focus: 1,1,1,1
+    text_color_normal: 1,1,1,.7
+    text_color_focus: 1,1,1,1
+
+<Check@MDCheckbox>:
+    group: 'group'
+    size_hint: None, None
+    size: dp(48), dp(48)

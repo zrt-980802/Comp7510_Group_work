@@ -1,0 +1,16 @@
+#: import * mandel_layouts
+<ForumMainScreen>:
+    name: 'ForumMainScreen'
+
+    canvas.before:
+        Color:
+            rgba: .2,.2,.5,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'source/pic/43916.jpg'
+
+    Column:
+        MDTopAppBar:
+            id: toolbar
+            left_action_items: [['chevron-left', lambda x: app.go_back()]]
