@@ -8,9 +8,29 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'source/pic/43916.jpg'
+
 
     Column:
         MDTopAppBar:
             id: toolbar
             left_action_items: [['chevron-left', lambda x: app.go_back()]]
+
+    ScrollView:
+        Column:
+            id: container
+            padding: dp(20)
+            spacing: dp(10)
+            adaptive_height: True
+            MDLabel:
+                size_hint_y: None
+                height: dp(25)
+                text: root.author
+            Column:
+                background_color: 1,0,0,.5
+                radius: dp(10)
+                padding: dp(10)
+                adaptive_height: True
+                MDLabel:
+                    text: root.content
+                    size_hint_y: None
+                    size: self.texture_size

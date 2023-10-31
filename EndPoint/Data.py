@@ -1,7 +1,7 @@
 import uuid
 import certifi
 import os
-import base64
+
 
 from EndPoint.ForumData.CommentInfo import CommentInfo
 from EndPoint.ForumData.PostInfo import PostInfo
@@ -31,7 +31,7 @@ userIdNameRelationship = 'UINR'
 
 
 def setInfo(info):
-    data_ref = db_ref.child(info.type_name).child(info.user_id)  # .set(to_json(info))
+    data_ref = db_ref.child(info.type_name).child(info.getId())  # .set(to_json(info))
     for data in info.__dict__.items():
         data_ref.child(data[0]).set(data[1])
 

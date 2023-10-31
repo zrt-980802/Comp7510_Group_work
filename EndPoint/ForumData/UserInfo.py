@@ -34,3 +34,5 @@ class UserInfo:
             self.user_follow_topic_list = [faker.ssn(), faker.ssn()]
         return
 
+    def getId(self):
+        return self.user_id
