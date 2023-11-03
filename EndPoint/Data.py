@@ -146,3 +146,16 @@ def getLatestPost(count=10):
     data = data_ref.order_by_key().limit_to_first(count).get()
     # print(data)
     return data
+
+
+def getPostByKeyword(keyword):
+    data_ref = db_ref.child('postInfo')
+    datas = data_ref.get()
+    result = []
+    # print(datas)
+    for data in datas:
+        # print(data)
+        if keyword in datas[data]['post_title']:
+            # print(data)
+            result.append(datas[data])
+    return result

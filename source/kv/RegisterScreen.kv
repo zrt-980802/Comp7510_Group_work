@@ -91,7 +91,10 @@
                 md_bg_color: "#ABB2B9"
                 on_press: root.clear()
 
-
+    Column:
+        MDTopAppBar:
+            id: toolbar
+            left_action_items: [["arrow-left", lambda x: app.go_back()]]
 
 <SignUpTextField@MDTextField>
     hint_text_color_normal: 1,1,1,.5

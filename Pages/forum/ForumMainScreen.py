@@ -49,14 +49,12 @@ class ForumMainScreen(Screen):
         )
 
     def listOfPostLoad(self):
-        post_data = Data.getLatestPost(4)
-        title_theme = 'Primary'
-        content_theme = 'Custom'
+        postData = Data.getLatestPost(4)
         count = 0
         styles = {
             "elevated": "#f6eeee", "filled": "#f4dedc", "outlined": "#f8f5f4"
         }
-        for item in post_data.values():
+        for item in postData.values():
             count += 1
             style = None
             if count % 3 == 0:

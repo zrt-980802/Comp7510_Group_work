@@ -1,6 +1,93 @@
 #: import * mandel_layouts
+<MD4Card>
+    padding: 4
+    size_hint: None, None
+    size: dp(400), dp(100)
+#    padding: 0, 0, 0, "16dp"
+
+    MDRelativeLayout:
+
+        MDIconButton:
+            id: root.uuid
+            icon: "chevron-right"
+            pos_hint: {"top": 1, "right": 1}
+            on_release: root.jump('postPage',[root.uuid])
+
+        MDLabel:
+            id: title
+            text: root.title
+            adaptive_size: True
+            color: "black"
+            pos: dp(5), dp(60)
+            bold: True
+            font_style: 'H6'
+            font_size: 35
+
+        MDLabel:
+            id: content
+            text: root.content
+            adaptive_size: True
+            color: "grey"
+            pos: dp(12), dp(12)
+            bold: True
+            font_style: 'Body1'
+            font_size: 20
+
+
 
 <SearchScreen>:
+    name: 'SearchScreen'
+    RecycleView:
+        scroll_y: 0.5
+
+        Column:
+            id: searchResult
+            adaptive_height: True
+            spacing: "16dp"
+            AsyncImage:
+#                source: 'source/pic/main_hello.jpg'
+                size_hint: None, None
+                size: dp(250), dp(50)
+                canvas:
+                    Color:
+                        rgba: 1,1,1,1
+                    Rectangle:
+                        texture: self.texture
+                        size: self.width, self.height
+                        pos: self.pos
 
 
+    Column:
+        MDTopAppBar:
+            id: toolbar
+#            left_action_items: [["arrow-left", lambda x: app.go_back()]]
+#            right_action_items: [["magnify", lambda x: root.search(),'Search','Search']]
+            MDRelativeLayout:
+#                size_hint_y: None
+                height: text_field.height
+                size_hint_x: None
+                width: dp(200)
+                pos_hint: {"center_x": .5, "center_y": .0}
+                MDIconButton:
+                    icon: "arrow-left"
+                    pos_hint: {"center_y": .9}
+                    pos:  - self.width*2- dp(8), 0
+                    theme_text_color: "Hint"
+                    on_release: app.go_back()
+                MDTextField:
+                    id: text_field
+                    hint_text: "Enter keyword"
+                    hint_text_color_normal: 1,1,1,.5
+                    hint_text_color_focus: 1,1,1,1
+                    line_color_normal: 1,1,1,.5
+                    line_color_focus: 1,1,1,1
+                    text_color_normal: 1,1,1,.7
+                    text_color_focus: 1,1,1,1
 
+
+                MDIconButton:
+                    icon: "magnify"
+                    pos_hint: {"center_y": .9}
+                    pos: text_field.width - self.width + dp(8), 0
+                    theme_text_color: "Hint"
+                    on_release: root.search()
