@@ -2,7 +2,6 @@ import uuid
 import certifi
 import os
 
-
 from EndPoint.ForumData.CommentInfo import CommentInfo
 from EndPoint.ForumData.PostInfo import PostInfo
 from EndPoint.ForumData.UserInfo import UserInfo
@@ -19,6 +18,7 @@ firebase_admin.initialize_app(cred_obj, {
     'storageBucket': 'comp7510-934b1.appspot.com'
 })
 
+dataBasePath = '/server/data'
 db_ref = db.reference('/server/data')
 bucket = storage.bucket()
 userIdNameRelationship = 'UINR'
@@ -98,13 +98,15 @@ def getCommentInfoById(commentId: str):
     return getInfo(commentId, CommentInfo.type_name)
 
 
-def getInfo(ID: str, type_name):
+def getInfo(ID: str, typeName):
     """
     :param ID:
     :type_name:
     :return: dict
     """
-    return db_ref.child(type_name).child(ID).get()
+    if ID == '' or ID is None:
+        return None
+    return db_ref.child(typeName).child(ID).get()
 
 
 def uploadFile(filePath):
@@ -136,3 +138,11 @@ def deleteFile(deleteFilePath):
         print(f'{deleteFilePath} is deleted')
     except:
         print(f'The target file {deleteFilePath} does not exist.')
+
+
+def getLatestPost(count=10):
+    data_ref = db.reference(dataBasePath + '/postInfo')
+    # data = data_ref.order_by_child('post_create_time_num').get()
+    data = data_ref.order_by_key().limit_to_first(count).get()
+    # print(data)
+    return data

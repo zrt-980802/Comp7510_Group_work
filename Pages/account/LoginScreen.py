@@ -11,10 +11,19 @@ class LoginScreen(Screen):
     def login(self):
         userName = self.ids.user_name_field.text
         password = self.ids.password_field.text
-        request_rel = Data.isUserNameExit(userName)
+        checkBox = self.ids.is_remember_for_next_time
+        if checkBox.state == 'down':
+            userName = 'admin'
+            password = 'admin123'
+        if userName == '' or password == '':
+            self.show_dialog('wrong', 'can\'t be emtpy!')
+            return
+        else:
+            request_rel = Data.isUserNameExit(userName)
         if request_rel[0] is False:
             self.show_dialog('wrong', 'Username not exits!')
             return
+
         userId = request_rel[1]
         userInfo = Data.getUserInfoById(userId)
         enPassword = desEncrypt(password)

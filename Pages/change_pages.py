@@ -55,14 +55,14 @@ class MyApp(MDApp):
         self.title = 'Forum'
 
         ### load KV files individually
-        Builder.load_file('source/kv/LoginScreen.kv')
-        Builder.load_file('source/kv/RegisterScreen.kv')
+        # Builder.load_file('source/kv/LoginScreen.kv')
+        # Builder.load_file('source/kv/RegisterScreen.kv')
         Builder.load_file('source/kv/ForumMainScreen.kv')
         # Builder.load_file('ChangeScreen1.kv')
 
         screenManager = ScreenManager()
-        screenManager.add_widget(LoginScreen(name='login'))
-        screenManager.add_widget(RegisterScreen(name='register'))
+        # screenManager.add_widget(LoginScreen(name='login'))
+        # screenManager.add_widget(RegisterScreen(name='register'))
         screenManager.add_widget(ForumMainScreen(name='main_forum'))
 
         # screenManager.add_widget(ChangeScreen1(name='ChangeScreen1'))

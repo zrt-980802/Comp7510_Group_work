@@ -11,6 +11,7 @@ class PostInfo:
     post_annex: list = None
     post_state: int = None
     post_create_time: str = None
+    post_create_time_num: int = None
     post_creator_user_id: str = None
 
     def __init__(self, mock=False):
@@ -22,6 +23,7 @@ class PostInfo:
             self.post_annex = [faker.url(), faker.url(), faker.url()]
             self.post_state = faker.random_digit()
             self.post_create_time = str(faker.date_time())
+            self.post_create_time_num = time.time()
             self.post_creator_user_id = faker.uuid4()
         return
 
