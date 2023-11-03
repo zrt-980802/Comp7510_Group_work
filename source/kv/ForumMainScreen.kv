@@ -3,6 +3,7 @@
     padding: 4
     size_hint: None, None
     size: dp(400), dp(100)
+#    padding: 0, 0, 0, "16dp"
 
     MDRelativeLayout:
 
@@ -45,12 +46,12 @@
 
 
 
-    ScrollView:
+    RecycleView:
         scroll_y: 0.5
         Column:
             id: listOfPost
             adaptive_height: True
-
+            spacing: "16dp"
             ### An async image widget contains an image
             ### The image is displayed with specific width and height (300 x 900)
             AsyncImage:

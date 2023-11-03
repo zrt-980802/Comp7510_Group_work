@@ -4,6 +4,7 @@ import os
 from Pages.account.LoginScreen import LoginScreen
 from Pages.account.RegisterScreen import RegisterScreen
 from Pages.forum.ForumMainScreen import ForumMainScreen
+from Pages.forum.SearchScreen import SearchScreen
 
 os.environ['SSL_CERT_FILE'] = certifi.where()
 
@@ -58,14 +59,14 @@ class MyApp(MDApp):
         # Builder.load_file('source/kv/LoginScreen.kv')
         # Builder.load_file('source/kv/RegisterScreen.kv')
         Builder.load_file('source/kv/ForumMainScreen.kv')
-        # Builder.load_file('ChangeScreen1.kv')
+        # Builder.load_file('source/kv/SearchScreen.kv')
 
         screenManager = ScreenManager()
         # screenManager.add_widget(LoginScreen(name='login'))
         # screenManager.add_widget(RegisterScreen(name='register'))
         screenManager.add_widget(ForumMainScreen(name='main_forum'))
+        # screenManager.add_widget(SearchScreen(name='search'))
 
-        # screenManager.add_widget(ChangeScreen1(name='ChangeScreen1'))
 
         appData.screenManager = screenManager
 
