@@ -15,7 +15,7 @@ from kivymd.uix.relativelayout import MDRelativeLayout
 from EndPoint import Data
 from Tools.Global import appData
 
-
+limitationOfShow = 10
 class MD4Card(MDCard):
     title = StringProperty()
     content = StringProperty()
@@ -44,11 +44,11 @@ class SearchScreen(Screen):
         postData = Data.getPostByKeyword(keyword)
         count = 0
         styles = {
-            "elevated": "#c2cff0", "filled": "#c2cff0", "outlined": "#c2cff0"
+            "elevated": "#f5e5ba", "filled": "#f5e5ba", "outlined": "#d4baf5"
         }
         for item in postData:
 
-            if count == 4:
+            if count == limitationOfShow:
                 break
             count += 1
             style = None

@@ -1,0 +1,24 @@
+#: import * mandel_layouts
+<FileSelectScreen>:
+    Column:
+        FileManager:
+            id: fileList
+
+            ### Change the color mode to 'dark'
+            mode: 'dark'
+
+            ### Set file type filter
+            file_types: ['png', 'jpg', 'jpeg']
+
+            ### Set item selection callback
+            on_item_press: root.show_selected()
+
+        Row:
+            halign: 'right'
+            adaptive_height: True
+            padding: dp(10)
+            spacing: dp(10)
+            background_color: 1,1,1,.1
+            MDFillRoundFlatButton:
+                text: 'Select'
+                on_press: root.select_callback()

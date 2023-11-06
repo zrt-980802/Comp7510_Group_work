@@ -7,6 +7,7 @@ from kivymd.uix.menu import MDDropdownMenu
 from kivymd.font_definitions import theme_font_styles
 
 from EndPoint import Data
+from Tools.Global import appData
 
 
 class MD3Card(MDCard):
@@ -27,13 +28,16 @@ def ifTooLong(content, isTitle=False):
     return content
 
 
+ManuListName = ['Create post', 'quit','Search']
+
+
 class ForumMainScreen(Screen):
     # name2Page = {'Homepage': '', }
 
     def menuLoad(self):
-        menu_list = [['Homepage', 'home-account'],
-                     ['post', 'note-plus-outline'],
-                     ['quit', 'location-exit']]
+        menu_list = [  # ['Homepage', 'home-account'],
+            [ManuListName[0], 'note-plus-outline'],
+            [ManuListName[1], 'location-exit']]
         menu_items = [
             {
                 "viewclass": "OneLineListItem",
@@ -90,6 +94,10 @@ class ForumMainScreen(Screen):
         self.menu.open()
 
     def menu_callback(self, button):
-        # self.menu.caller = button
-        # self.menu.open()
-        print(button)
+        if button == ManuListName[0]:
+            appData.app.show_screen('createPost')
+        if button == ManuListName[1]:
+            appData.app.go_back_login()
+        if button == ManuListName[2]:
+            appData.app.show_screen('search')
+        self.menu.dismiss()

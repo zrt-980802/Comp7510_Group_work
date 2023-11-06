@@ -1,0 +1,60 @@
+#: import * mandel_layouts
+
+<CreatePostScreen>:
+
+    canvas.before:
+        Color:
+            rgba: .3,.3,.2,0.5
+        Rectangle:
+            pos: self.pos
+            size: self.size
+#            source: 'source/pic/93375.jpg'
+
+    MDLabel:
+        id: label
+        text: 'Create post'
+        pos_hint: {"center_x": .2, "center_y": 0.85}
+        font_size: dp(30)
+        color: 1,1,1,1
+        halign: 'center'
+
+    CreateMDTextField:
+        id: titleField
+        pos_hint: {"center_x": .5, "center_y": 0.75}
+        size_hint_x: .8
+        max_text_length: 35
+        helper_text: 'Note: No more than 35 letters'
+        hint_text: 'Title'
+
+    CreateMDTextField:
+        id: contentField
+        pos_hint: {"center_x": .5, "center_y": 0.5}
+        size_hint_x: .8
+        size_hint_y: .3
+        multiline: True
+        max_text_length: 255
+        helper_text: 'Note: No more than 255 letters'
+        mode: 'fill'
+        hint_text: 'Content'
+
+    MDRaisedButton:
+        text: "Post"
+        md_bg_color: "#42A5F5"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        size_hint: (0.4,0.1)
+        on_press: root.createPost()
+
+    MDTopAppBar:
+        id: toolbar
+        pos_hint: {'center_x': .5, 'center_y': 0.95}
+        left_action_items: [["arrow-left", lambda x: app.go_back()]]
+
+
+
+<CreateMDTextField@MDTextField>
+    hint_text_color_normal: 0.67,0.2,0.0,.7
+    hint_text_color_focus: 0.34,0.1,0.0,1
+    line_color_normal: 1,1,1,.5
+    line_color_focus: 1,1,1,1
+    text_color_normal: 0,0,0.0,.7
+    text_color_focus: 0,0,0.0,1

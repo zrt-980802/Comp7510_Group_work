@@ -3,6 +3,8 @@ import os
 
 from Pages.account.LoginScreen import LoginScreen
 from Pages.account.RegisterScreen import RegisterScreen
+from Pages.file.FileSelectScreen import FileSelectScreen
+from Pages.forum.CreatePostScreen import CreatePostScreen
 from Pages.forum.ForumMainScreen import ForumMainScreen
 from Pages.forum.SearchScreen import SearchScreen
 
@@ -24,6 +26,11 @@ appData.last_screens = []
 
 
 class MyApp(MDApp):
+
+    def go_back_login(self):
+        screenManager = appData.screenManager
+        while screenManager.current != 'login':
+            appData.last_screens.pop()
 
     def show_screen(self, screen_name):
         screenManager = appData.screenManager
@@ -58,15 +65,18 @@ class MyApp(MDApp):
         ### load KV files individually
         # Builder.load_file('source/kv/LoginScreen.kv')
         # Builder.load_file('source/kv/RegisterScreen.kv')
-        # Builder.load_file('source/kv/ForumMainScreen.kv')
+        Builder.load_file('source/kv/ForumMainScreen.kv')
         Builder.load_file('source/kv/SearchScreen.kv')
+        Builder.load_file('source/kv/CreatePostScreen.kv')
+        # Builder.load_file('source/kv/FileSelectScreen.kv')
 
         screenManager = ScreenManager()
         # screenManager.add_widget(LoginScreen(name='login'))
         # screenManager.add_widget(RegisterScreen(name='register'))
-        # screenManager.add_widget(ForumMainScreen(name='main_forum'))
+        screenManager.add_widget(ForumMainScreen(name='mainForum'))
         screenManager.add_widget(SearchScreen(name='search'))
-
+        screenManager.add_widget(CreatePostScreen(name='createPost'))
+        # screenManager.add_widget(FileSelectScreen(name='fileSelect'))
 
         appData.screenManager = screenManager
 

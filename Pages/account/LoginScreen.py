@@ -20,6 +20,7 @@ class LoginScreen(Screen):
             return
         else:
             request_rel = Data.isUserNameExit(userName)
+
         if request_rel[0] is False:
             self.show_dialog('wrong', 'Username not exits!')
             return
@@ -31,7 +32,7 @@ class LoginScreen(Screen):
             self.show_dialog('wrong', 'Username or password is wrong!')
             return
         self.show_dialog('success', 'login successful!')
-        appData.userInfo = userInfo
+        appData.userData.userInfo = userInfo
         appData.app.show_screen('main_forum')
 
     def show_dialog(self, title, text):
