@@ -9,6 +9,9 @@ from EndPoint.ForumData.UserInfo import UserInfo
 import firebase_admin
 from firebase_admin import db, storage
 
+from Tools import NowTime
+from Tools.Global import appData
+
 os.environ['SSL_CERT_FILE'] = certifi.where()
 
 cred_obj = firebase_admin.credentials.Certificate('source/json/token.json')
@@ -22,6 +25,7 @@ dataBasePath = '/server/data'
 db_ref = db.reference('/server/data')
 bucket = storage.bucket()
 userIdNameRelationship = 'UINR'
+userIdCommentIdRelationship = 'UICR'
 
 
 # def to_json(data):
@@ -88,7 +92,10 @@ def getPostInfoById(postId: str):
     :param postId:
     :return: dict
     """
-    return getInfo(postId, PostInfo.type_name)
+    data = getInfo(postId, PostInfo.type_name)
+    postInfo = PostInfo()
+    postInfo.__dict__.update(data)
+    return postInfo
 
 
 def getCommentInfoById(commentId: str):
@@ -96,7 +103,10 @@ def getCommentInfoById(commentId: str):
     :param commentId:
     :return: dict
     """
-    return getInfo(commentId, CommentInfo.type_name)
+    data = getInfo(commentId, CommentInfo.type_name)
+    commentInfo = CommentInfo()
+    commentInfo.__dict__.update(data)
+    return commentInfo
 
 
 def getInfo(ID: str, typeName):
@@ -162,5 +172,38 @@ def getPostByKeyword(keyword):
     return result
 
 
-def getLatestComment(count, postUuid):
-    return None
+def getLatestComment(postId):
+    data_ref = db_ref.child(userIdCommentIdRelationship).child(postId)
+    data = data_ref.get()
+    tmp = []
+    for userId in data:
+        for commentId in data[userId]:
+            tmp.append([NowTime.str2TimeNum(data[userId][commentId]), userId, commentId])
+    tmp.sort()
+    print(tmp)
+    result = []
+    count = 0
+    for item in tmp:
+        count += 1
+        if count == 5:
+            break
+        ### for test
+        userInfo = UserInfo(True)
+        commentInfo = CommentInfo(True)
+
+        # commentInfo = getCommentInfoById(item[2])
+        # userInfo = getUserInfoById(item[1])
+
+        info = {'userInfo': userInfo, 'commentInfo': commentInfo}
+        result.append(info)
+    return result
+
+
+def setUserIdCommentIdRelationship(postId, userId, commentId):
+    data_ref = db_ref.child(userIdCommentIdRelationship).child(postId).child(userId).child(commentId)
+    data_ref.set(NowTime.nowYMDHMS())
+
+
+def deleteUserIdCommentIdRelationshipByCommentId(postId, userId, commentId):
+    data_ref = db_ref.child(userIdCommentIdRelationship).child(postId).child(userId).child(commentId)
+    data_ref.delete()

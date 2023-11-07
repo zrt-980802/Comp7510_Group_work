@@ -79,7 +79,9 @@ class MyApp(MDApp):
         # screenManager.add_widget(SearchScreen(name='search'))
         # screenManager.add_widget(CreatePostScreen(name='createPost'))
         # screenManager.add_widget(FileSelectScreen(name='fileSelect'))
-        screenManager.add_widget(PostScreen(name='post'))
+        postScreen = PostScreen(name='post')
+        screenManager.add_widget(postScreen)
+        appData.postScreen = postScreen
 
         appData.screenManager = screenManager
 
@@ -92,3 +94,5 @@ class MyApp(MDApp):
 appData.topic = 'forum'
 appData.app = MyApp()
 appData.app.run()
+
+appData.isTest = True

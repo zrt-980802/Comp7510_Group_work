@@ -7,6 +7,7 @@
 @Motto：ABC(Always Be Coding)
 """
 import time
+from datetime import datetime
 
 
 def nowYMDHMS():
@@ -15,3 +16,8 @@ def nowYMDHMS():
 
 def nowNum():
     return str(time.time())
+
+
+def str2TimeNum(datetime_str):
+    datetime_object = datetime.strptime(datetime_str, '%Y-%m-%d %H:%M:%S')
+    return datetime_object

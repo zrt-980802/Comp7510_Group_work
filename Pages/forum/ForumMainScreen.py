@@ -19,6 +19,7 @@ class MD3Card(MDCard):
         print(f'postInfo{postInfo}')
         appData.userData.postUuid = postInfo
         appData.app.show_screen('post')
+        appData.postScreen.postLoad(self.uuid)
 
 
 def ifTooLong(content, isTitle=False):

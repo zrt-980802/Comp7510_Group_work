@@ -1,27 +1,32 @@
 #: import * mandel_layouts
 <MD5Card>
-    padding: 4
+#    padding: 4
     size_hint: None, None
-    size: dp(400), dp(100)
+    size: dp(360), dp(70)
+
 #    padding: 0, 0, 0, "16dp"
 
     MDRelativeLayout:
-
-        MDIconButton:
-            id: root.commentUuid
-            icon: "chevron-right"
-            pos_hint: {"top": 1, "right": 1}
-            on_release: root.reply()
+        orientation: "vertical"
+        adaptive_height: True
+        spacing: "6dp"
+        padding: "12dp", 0, 0, 0
+        pos_hint: {"center_y": .5}
+#        MDIconButton:
+#            id: root.commentUuid
+#            icon: "chevron-right"
+#            pos_hint: {"top": 1, "right": 1}
+##            on_release: root.reply()
 
         MDLabel:
             id: commentUserName
-            text: root.userName
+            text: root.commentUserName
             adaptive_size: True
             color: "black"
-            pos: dp(5), dp(60)
+            pos: dp(5), dp(40)
             bold: True
             font_style: 'H6'
-            font_size: 35
+            font_size: 30
 
         MDLabel:
             id: commentContent
@@ -31,8 +36,48 @@
             pos: dp(12), dp(12)
             bold: True
             font_style: 'Body1'
-            font_size: 20
+            font_size: 15
+            # Automatic line wrapping
+            text_size: self.width, None
+            size_hint: 0.95, None
+            height: self.texture_size[1]
+<MD4Card>
+    padding: 4
+    size_hint: None, None
+    size: dp(400), dp(100)
+#    padding: 0, 0, 0, "16dp"
 
+    MDRelativeLayout:
+
+#        MDIconButton:
+#            id: root.uuid
+#            icon: "chevron-right"
+#            pos_hint: {"top": 1, "right": 1}
+#            on_release: root.jump('postPage',[root.uuid])
+
+        MDLabel:
+            id: title
+            text: root.title
+            adaptive_size: True
+            color: "black"
+            pos: dp(5), dp(60)
+            bold: True
+            font_style: 'H6'
+            font_size: 35
+
+        MDLabel:
+            id: content
+            text: root.content
+            adaptive_size: True
+            color: "grey"
+            pos: dp(12), dp(12)
+            bold: True
+            font_style: 'Body1'
+            font_size: 20
+            # Automatic line wrapping
+            text_size: self.width, None
+            size_hint: 1, None
+            height: self.texture_size[1]
 
 <PostScreen>:
     RecycleView:
@@ -41,12 +86,10 @@
             id: postAndComment
             adaptive_height: True
             spacing: "16dp"
-            ### An async image widget contains an image
-            ### The image is displayed with specific width and height (300 x 900)
+            halign: 'center'
             AsyncImage:
-                source: 'source/pic/main_hello.jpg'
                 size_hint: None, None
-                size: dp(250), dp(250)
+                size: dp(250), dp(75)
                 canvas:
                     Color:
                         rgba: 1,1,1,1
@@ -54,8 +97,21 @@
                         texture: self.texture
                         size: self.width, self.height
                         pos: self.pos
+
+
     Column:
         MDTopAppBar:
             id: toolbar
             pos_hint: {'center_x': .5, 'center_y': 0.95}
             left_action_items: [["arrow-left", lambda x: app.go_back()]]
+#        MDBottomNavigation:
+#            selected_color_background: "orange"
+#            text_color_active: "lightgrey"
+#            pos_hint: {'center_x': .5, 'center_y': 0.05}
+#            MDTextField:
+#                hint_text: "Helper text on focus"
+#                helper_text: "This will disappear when you click off"
+#                helper_text_mode: "on_focus"
+#                size_hint_x: .8
+#                max_text_length: 35
+##                pos_hint: {'center_x': .5, 'center_y': 0.15}
