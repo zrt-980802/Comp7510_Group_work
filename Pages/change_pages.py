@@ -7,6 +7,7 @@ from Pages.file.FileSelectScreen import FileSelectScreen
 from Pages.forum.CreatePostScreen import CreatePostScreen
 from Pages.forum.ForumMainScreen import ForumMainScreen
 from Pages.forum.SearchScreen import SearchScreen
+from Pages.forum.PostScreen import PostScreen
 
 os.environ['SSL_CERT_FILE'] = certifi.where()
 
@@ -66,17 +67,19 @@ class MyApp(MDApp):
         # Builder.load_file('source/kv/LoginScreen.kv')
         # Builder.load_file('source/kv/RegisterScreen.kv')
         Builder.load_file('source/kv/ForumMainScreen.kv')
-        Builder.load_file('source/kv/SearchScreen.kv')
-        Builder.load_file('source/kv/CreatePostScreen.kv')
+        # Builder.load_file('source/kv/SearchScreen.kv')
+        # Builder.load_file('source/kv/CreatePostScreen.kv')
         # Builder.load_file('source/kv/FileSelectScreen.kv')
+        Builder.load_file('source/kv/PostScreen.kv')
 
         screenManager = ScreenManager()
         # screenManager.add_widget(LoginScreen(name='login'))
         # screenManager.add_widget(RegisterScreen(name='register'))
         screenManager.add_widget(ForumMainScreen(name='mainForum'))
-        screenManager.add_widget(SearchScreen(name='search'))
-        screenManager.add_widget(CreatePostScreen(name='createPost'))
+        # screenManager.add_widget(SearchScreen(name='search'))
+        # screenManager.add_widget(CreatePostScreen(name='createPost'))
         # screenManager.add_widget(FileSelectScreen(name='fileSelect'))
+        screenManager.add_widget(PostScreen(name='post'))
 
         appData.screenManager = screenManager
 

@@ -1,5 +1,5 @@
 #: import * mandel_layouts
-<MD3Card>
+<MD5Card>
     padding: 4
     size_hint: None, None
     size: dp(400), dp(100)
@@ -8,14 +8,14 @@
     MDRelativeLayout:
 
         MDIconButton:
-            id: root.uuid
+            id: root.commentUuid
             icon: "chevron-right"
             pos_hint: {"top": 1, "right": 1}
-            on_release: root.jump2Post(root.uuid)
+            on_release: root.reply()
 
         MDLabel:
-            id: title
-            text: root.title
+            id: commentUserName
+            text: root.userName
             adaptive_size: True
             color: "black"
             pos: dp(5), dp(60)
@@ -24,8 +24,8 @@
             font_size: 35
 
         MDLabel:
-            id: content
-            text: root.content
+            id: commentContent
+            text: root.commentContent
             adaptive_size: True
             color: "grey"
             pos: dp(12), dp(12)
@@ -34,12 +34,11 @@
             font_size: 20
 
 
-<ForumMainScreen>:
-    name: 'ForumMainScreen'
+<PostScreen>:
     RecycleView:
         scroll_y: 0.5
         Column:
-            id: listOfPost
+            id: postAndComment
             adaptive_height: True
             spacing: "16dp"
             ### An async image widget contains an image
@@ -58,6 +57,5 @@
     Column:
         MDTopAppBar:
             id: toolbar
-            left_action_items: [["menu", lambda x: root.callback(x)]]
-            right_action_items: [["magnify", lambda x: root.menu_callback('Search'),'Search','Search']]
-
+            pos_hint: {'center_x': .5, 'center_y': 0.95}
+            left_action_items: [["arrow-left", lambda x: app.go_back()]]

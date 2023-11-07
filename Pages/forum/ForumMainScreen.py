@@ -15,8 +15,10 @@ class MD3Card(MDCard):
     content = StringProperty()
     uuid = StringProperty()
 
-    def jump(self, pageName, listInfo):
-        print(f'pageName{pageName},listOfInfo{listInfo}')
+    def jump2Post(self, postInfo):
+        print(f'postInfo{postInfo}')
+        appData.userData.postUuid = postInfo
+        appData.app.show_screen('post')
 
 
 def ifTooLong(content, isTitle=False):
@@ -28,7 +30,7 @@ def ifTooLong(content, isTitle=False):
     return content
 
 
-ManuListName = ['Create post', 'quit','Search']
+ManuListName = ['Create post', 'quit', 'Search']
 
 
 class ForumMainScreen(Screen):
@@ -88,6 +90,10 @@ class ForumMainScreen(Screen):
         self.menu = None
         self.menuLoad()
         self.listOfPostLoad()
+
+        #### for test  37563429-77be-11ee-9fae-8c8caadc63a7
+        userId = '37563429-77be-11ee-9fae-8c8caadc63a7'
+        appData.userData = Data.getUserInfoById(userId)
 
     def callback(self, button):
         self.menu.caller = button

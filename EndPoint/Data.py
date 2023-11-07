@@ -33,6 +33,7 @@ userIdNameRelationship = 'UINR'
 def setInfo(info):
     data_ref = db_ref.child(info.type_name).child(info.getId())  # .set(to_json(info))
     for data in info.__dict__.items():
+        # print(data)
         data_ref.child(data[0]).set(data[1])
 
 
@@ -159,3 +160,7 @@ def getPostByKeyword(keyword):
             # print(data)
             result.append(datas[data])
     return result
+
+
+def getLatestComment(count, postUuid):
+    return None
