@@ -31,7 +31,7 @@ def ifTooLong(content, isTitle=False):
     return content
 
 
-ManuListName = ['Create post', 'quit', 'Search', 'refresh']
+MenuListName = ['Create post', 'quit', 'Search', 'refresh']
 
 
 class ForumMainScreen(Screen):
@@ -42,8 +42,8 @@ class ForumMainScreen(Screen):
 
     def menuLoad(self):
         menu_list = [  # ['Homepage', 'home-account'],
-            [ManuListName[0], 'note-plus-outline'],
-            [ManuListName[1], 'location-exit']]
+            [MenuListName[0], 'note-plus-outline'],
+            [MenuListName[1], 'location-exit']]
         menu_items = [
             {
                 "viewclass": "OneLineListItem",
@@ -101,12 +101,12 @@ class ForumMainScreen(Screen):
         self.menu.open()
 
     def menu_callback(self, button):
-        if button == ManuListName[0]:
+        if button == MenuListName[0]:
             appData.app.show_screen('createPost')
-        if button == ManuListName[1]:
+        if button == MenuListName[1]:
             appData.app.go_back_login()
-        if button == ManuListName[2]:
+        if button == MenuListName[2]:
             appData.app.show_screen('search')
-        if button == ManuListName[3]:
+        if button == MenuListName[3]:
             self.reload()
         self.menu.dismiss()

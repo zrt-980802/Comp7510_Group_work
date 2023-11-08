@@ -66,7 +66,7 @@ class RegisterScreen(Screen):
         print(f'{user_name},{email},{password},{re_password},{phone_number}')
         if user_name == '' or email == '' or password == '' or re_password == '' or phone_number == '':
             return [False, 'wrong', 'can\'t fill with blank.']
-        if Data.isUserNameExit(user_name)[0] is True:
+        if Data.isUserNameExist(user_name)[0] is True:
             return [False, 'wrong', 'Username already exits']
         if re_password != password:
             return [False, 'wrong', 'two password is not same.']

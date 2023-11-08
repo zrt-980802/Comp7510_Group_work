@@ -68,7 +68,7 @@ def updateUserIdAndUserNameRel(userId, userName, oldUserName):
     setUserIdAndUserNameRel(userId, userName)
 
 
-def isUserNameExit(userName):
+def isUserNameExist(userName):
     rela = getUserIdAndUserNameRel(userName)
     if rela is None:
         return [False]

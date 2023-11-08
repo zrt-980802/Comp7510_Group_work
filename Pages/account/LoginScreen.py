@@ -24,7 +24,7 @@ class LoginScreen(Screen):
             self.show_dialog('wrong', 'can\'t be emtpy!')
             return
         else:
-            request_rel = Data.isUserNameExit(userName)
+            request_rel = Data.isUserNameExist(userName)
 
         if request_rel[0] is False:
             self.show_dialog('wrong', 'Username not exits!')
