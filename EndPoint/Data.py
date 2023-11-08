@@ -17,8 +17,8 @@ os.environ['SSL_CERT_FILE'] = certifi.where()
 cred_obj = firebase_admin.credentials.Certificate('source/json/token.json')
 
 firebase_admin.initialize_app(cred_obj, {
-    'databaseURL': 'https://comp7510-934b1-default-rtdb.asia-southeast1.firebasedatabase.app/',
-    'storageBucket': 'comp7510-934b1.appspot.com'
+    'databaseURL': 'https://comp7510-dbd61-default-rtdb.asia-southeast1.firebasedatabase.app/',
+    'storageBucket': 'comp7510-dbd61.appspot.com'
 })
 
 dataBasePath = '/server/data'
