@@ -10,6 +10,6 @@ from Tools.Global import appData
 
 
 def checkLogin():
-    userInfo = appData.userData.userInfo
+    userInfo = appData.userInfo
     if userInfo is None:
         return False

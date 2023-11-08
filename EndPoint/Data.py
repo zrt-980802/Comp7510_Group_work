@@ -35,10 +35,17 @@ userIdCommentIdRelationship = 'UICR'
 
 
 def setInfo(info):
-    data_ref = db_ref.child(info.type_name).child(info.getId())  # .set(to_json(info))
+    data_ref = db_ref.child(info.type_name).child(info.getId())
     for data in info.__dict__.items():
-        # print(data)
+        print(data)
+        if data[1] is None:
+            continue
         data_ref.child(data[0]).set(data[1])
+
+
+def deleteInfo(info):
+    data_ref = db_ref.child(info.type_name).child(info.getId())
+    data_ref.delete()
 
 
 def getUserIdAndUserNameRel(userName):
@@ -176,26 +183,21 @@ def getLatestComment(postId):
     data_ref = db_ref.child(userIdCommentIdRelationship).child(postId)
     data = data_ref.get()
     tmp = []
-    for userId in data:
-        for commentId in data[userId]:
-            tmp.append([NowTime.str2TimeNum(data[userId][commentId]), userId, commentId])
-    tmp.sort()
-    print(tmp)
     result = []
-    count = 0
-    for item in tmp:
-        count += 1
-        if count == 5:
-            break
-        ### for test
-        userInfo = UserInfo(True)
-        commentInfo = CommentInfo(True)
-
-        # commentInfo = getCommentInfoById(item[2])
-        # userInfo = getUserInfoById(item[1])
-
-        info = {'userInfo': userInfo, 'commentInfo': commentInfo}
-        result.append(info)
+    if data is not None:
+        for userId in data:
+            for commentId in data[userId]:
+                tmp.append([NowTime.str2TimeNum(data[userId][commentId]), userId, commentId])
+        tmp.sort()
+        count = 0
+        for item in tmp:
+            count += 1
+            if count == 5:
+                break
+            commentInfo = getCommentInfoById(item[2])
+            userInfo = getUserInfoById(item[1])
+            info = {'userInfo': userInfo, 'commentInfo': commentInfo}
+            result.append(info)
     return result
 
 

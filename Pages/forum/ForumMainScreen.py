@@ -1,5 +1,6 @@
 from kivy.metrics import dp
 from kivy.properties import StringProperty
+from kivy.uix.image import AsyncImage
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.card import MDCard
 from kivymd.uix.label import MDLabel
@@ -17,7 +18,6 @@ class MD3Card(MDCard):
 
     def jump2Post(self, postInfo):
         print(f'postInfo{postInfo}')
-        appData.userData.postUuid = postInfo
         appData.app.show_screen('post')
         appData.postScreen.postLoad(self.uuid)
 
@@ -31,11 +31,15 @@ def ifTooLong(content, isTitle=False):
     return content
 
 
-ManuListName = ['Create post', 'quit', 'Search']
+ManuListName = ['Create post', 'quit', 'Search', 'refresh']
 
 
 class ForumMainScreen(Screen):
     # name2Page = {'Homepage': '', }
+    def reload(self):
+        self.ids.listOfPost.clear_widgets()
+        self.ids.listOfPost.refresh_done()
+        self.listOfPostLoad()
 
     def menuLoad(self):
         menu_list = [  # ['Homepage', 'home-account'],
@@ -61,40 +65,37 @@ class ForumMainScreen(Screen):
         styles = {
             "elevated": "#f6eeee", "filled": "#f4dedc", "outlined": "#f8f5f4"
         }
-        for item in postData.values():
-            count += 1
-            style = None
-            if count % 3 == 0:
-                style = 'elevated'
-            elif count % 3 == 1:
-                style = 'filled'
-            else:
-                style = 'outlined'
-            title = ifTooLong(item['post_title'], True)
-            content = ifTooLong(item['post_content'], False)
-            uuid = item['post_id']
-            self.ids.listOfPost.add_widget(
-                MD3Card(
-                    line_color=(0.2, 0.2, 0.2, 0.8),
-                    style=style,
-                    title=title,
-                    content=content,
-                    uuid=uuid,
-                    md_bg_color=styles[style],
-                    shadow_softness=2 if style == "elevated" else 12,
-                    shadow_offset=(0, 1) if style == "elevated" else (0, 2),
-                )
-            )
 
-    def __init__(self, **kw):
-        super().__init__(**kw)
+        if postData is not None:
+            for item in postData.values():
+                count += 1
+                style = None
+                if count % 3 == 0:
+                    style = 'elevated'
+                elif count % 3 == 1:
+                    style = 'filled'
+                else:
+                    style = 'outlined'
+                title = ifTooLong(item['post_title'], True)
+                content = ifTooLong(item['post_content'], False)
+                uuid = item['post_id']
+                self.ids.listOfPost.add_widget(
+                    MD3Card(
+                        line_color=(0.2, 0.2, 0.2, 0.8),
+                        style=style,
+                        title=title,
+                        content=content,
+                        uuid=uuid,
+                        md_bg_color=styles[style],
+                        shadow_softness=2 if style == "elevated" else 12,
+                        shadow_offset=(0, 1) if style == "elevated" else (0, 2),
+                    )
+                )
+
+    def on_start(self):
         self.menu = None
         self.menuLoad()
         self.listOfPostLoad()
-
-        #### for test  37563429-77be-11ee-9fae-8c8caadc63a7
-        userId = '37563429-77be-11ee-9fae-8c8caadc63a7'
-        appData.userData = Data.getUserInfoById(userId)
 
     def callback(self, button):
         self.menu.caller = button
@@ -107,4 +108,6 @@ class ForumMainScreen(Screen):
             appData.app.go_back_login()
         if button == ManuListName[2]:
             appData.app.show_screen('search')
+        if button == ManuListName[3]:
+            self.reload()
         self.menu.dismiss()

@@ -22,17 +22,20 @@ class CreatePostScreen(Screen):
         if CI.checkLogin() is False:
             appData.app.go_back_login()
 
-        title = self.ids.titleField
-        content = self.ids.contentField
-        userInfo = appData.userData.userInfo
+        title = self.ids.titleField.text
+        content = self.ids.contentField.text
+        userInfo = appData.userInfo
         newPost = PostInfo()
         newPost.post_id = 'post:' + str(uuid.uuid1())
-        newPost.post_state = 0
+        newPost.post_state = '0'
         newPost.post_title = title
         newPost.post_content = content
         newPost.post_create_time = NowTime.nowYMDHMS()
         newPost.post_create_time_num = NowTime.nowNum()
         newPost.post_creator_user_id = userInfo.user_id
         # newPost.post_annex
-        Data.setInfo(newPost)
+        try:
+            Data.setInfo(newPost)
+        except Exception:
+            Data.deleteInfo(newPost)
         appData.app.go_back()

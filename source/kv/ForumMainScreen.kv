@@ -36,28 +36,35 @@
 
 <ForumMainScreen>:
     name: 'ForumMainScreen'
+    AsyncImage:
+        source: 'source/pic/main_hello.jpg'
+        size_hint: None, None
+        pos_hint: {"center_x": .5, "center_y": .8}
+        size: dp(250), dp(250)
+        canvas:
+            Color:
+                rgba: 1,1,1,1
+            Rectangle:
+                texture: self.texture
+                size: self.width, self.height
+                pos: self.pos
     RecycleView:
         scroll_y: 0.5
+        pos_hint: {"center_x": .5, "center_y": .2}
         Column:
             id: listOfPost
             adaptive_height: True
             spacing: "16dp"
             ### An async image widget contains an image
             ### The image is displayed with specific width and height (300 x 900)
-            AsyncImage:
-                source: 'source/pic/main_hello.jpg'
-                size_hint: None, None
-                size: dp(250), dp(250)
-                canvas:
-                    Color:
-                        rgba: 1,1,1,1
-                    Rectangle:
-                        texture: self.texture
-                        size: self.width, self.height
-                        pos: self.pos
+
     Column:
         MDTopAppBar:
             id: toolbar
             left_action_items: [["menu", lambda x: root.callback(x)]]
-            right_action_items: [["magnify", lambda x: root.menu_callback('Search'),'Search','Search']]
+            right_action_items:
+                [
+                ["magnify", lambda x: root.menu_callback('Search'),'Search','Search'],
+                ["refresh", lambda x: root.menu_callback('refresh'),'refresh','refresh'],
+                ]
 

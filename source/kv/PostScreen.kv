@@ -80,38 +80,38 @@
             height: self.texture_size[1]
 
 <PostScreen>:
+
+
     RecycleView:
         scroll_y: 0.5
+        pos_hint: {"center_x": .5, "center_y": .4}
         Column:
             id: postAndComment
             adaptive_height: True
             spacing: "16dp"
             halign: 'center'
-            AsyncImage:
-                size_hint: None, None
-                size: dp(250), dp(75)
-                canvas:
-                    Color:
-                        rgba: 1,1,1,1
-                    Rectangle:
-                        texture: self.texture
-                        size: self.width, self.height
-                        pos: self.pos
+
 
 
     Column:
         MDTopAppBar:
             id: toolbar
             pos_hint: {'center_x': .5, 'center_y': 0.95}
-            left_action_items: [["arrow-left", lambda x: app.go_back()]]
-#        MDBottomNavigation:
-#            selected_color_background: "orange"
-#            text_color_active: "lightgrey"
-#            pos_hint: {'center_x': .5, 'center_y': 0.05}
-#            MDTextField:
-#                hint_text: "Helper text on focus"
-#                helper_text: "This will disappear when you click off"
-#                helper_text_mode: "on_focus"
-#                size_hint_x: .8
-#                max_text_length: 35
-##                pos_hint: {'center_x': .5, 'center_y': 0.15}
+            left_action_items: [["arrow-left", lambda x: root.quit()]]
+
+    MDTextField:
+        id: replyComment
+        hint_text: "Reply"
+        helper_text: "No more than 35 letters."
+        helper_text_mode: "on_focus"
+        pos_hint: {'center_x': .45, 'center_y': 0.05}
+        size_hint_x: .8
+        max_text_length: 35
+        background_color: '#6da0f2'
+    MDIconButton:
+        icon: 'arrow-top-right'
+        pos_hint: {'center_x': .85, 'center_y': 0.05}
+        on_release: root.reply()
+
+
+#                pos_hint: {'center_x': .5, 'center_y': 0.15}

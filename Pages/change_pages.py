@@ -1,6 +1,9 @@
+import logging
+
 import certifi
 import os
 
+from EndPoint import Data
 from Pages.account.LoginScreen import LoginScreen
 from Pages.account.RegisterScreen import RegisterScreen
 from Pages.file.FileSelectScreen import FileSelectScreen
@@ -17,7 +20,10 @@ from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
 
-from Tools.Global import appData
+from Tools.Global import appData, AppData
+
+ch = logging.StreamHandler()
+ch.setLevel(logging.WARNING)
 
 # 记得修改尺寸
 if platform in ('win', 'macosx'):
@@ -64,25 +70,27 @@ class MyApp(MDApp):
         self.title = 'Forum'
 
         ### load KV files individually
-        # Builder.load_file('source/kv/LoginScreen.kv')
-        # Builder.load_file('source/kv/RegisterScreen.kv')
+        Builder.load_file('source/kv/LoginScreen.kv')
+        Builder.load_file('source/kv/RegisterScreen.kv')
         Builder.load_file('source/kv/ForumMainScreen.kv')
-        # Builder.load_file('source/kv/SearchScreen.kv')
-        # Builder.load_file('source/kv/CreatePostScreen.kv')
-        # Builder.load_file('source/kv/FileSelectScreen.kv')
+        Builder.load_file('source/kv/SearchScreen.kv')
+        Builder.load_file('source/kv/CreatePostScreen.kv')
+        Builder.load_file('source/kv/FileSelectScreen.kv')
         Builder.load_file('source/kv/PostScreen.kv')
 
         screenManager = ScreenManager()
-        # screenManager.add_widget(LoginScreen(name='login'))
-        # screenManager.add_widget(RegisterScreen(name='register'))
-        screenManager.add_widget(ForumMainScreen(name='mainForum'))
-        # screenManager.add_widget(SearchScreen(name='search'))
-        # screenManager.add_widget(CreatePostScreen(name='createPost'))
-        # screenManager.add_widget(FileSelectScreen(name='fileSelect'))
+        screenManager.add_widget(LoginScreen(name='login'))
+        screenManager.add_widget(RegisterScreen(name='register'))
+        forumMainScreen = ForumMainScreen(name='mainForum')
+        screenManager.add_widget(forumMainScreen)
+        screenManager.add_widget(SearchScreen(name='search'))
+        screenManager.add_widget(CreatePostScreen(name='createPost'))
+        screenManager.add_widget(FileSelectScreen(name='fileSelect'))
         postScreen = PostScreen(name='post')
         screenManager.add_widget(postScreen)
-        appData.postScreen = postScreen
 
+        appData.postScreen = postScreen
+        appData.forumMainScreen = forumMainScreen
         appData.screenManager = screenManager
 
         return screenManager
@@ -93,6 +101,8 @@ class MyApp(MDApp):
 ### We can add anything to appData and get them back in different py files
 appData.topic = 'forum'
 appData.app = MyApp()
-appData.app.run()
+# for test
+# appData.isTest = True
+# appData.userInfo = Data.getUserInfoById('37563429-77be-11ee-9fae-8c8caadc63a7')
 
-appData.isTest = True
+appData.app.run()

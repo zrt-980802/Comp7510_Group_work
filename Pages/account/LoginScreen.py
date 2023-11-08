@@ -32,8 +32,9 @@ class LoginScreen(Screen):
             self.show_dialog('wrong', 'Username or password is wrong!')
             return
         self.show_dialog('success', 'login successful!')
-        appData.userData.userInfo = userInfo
-        appData.app.show_screen('main_forum')
+        appData.userInfo = userInfo
+        appData.app.show_screen('mainForum')
+        appData.forumMainScreen.on_start()
 
     def show_dialog(self, title, text):
         dialog = MDDialog(
