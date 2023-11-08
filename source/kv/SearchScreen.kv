@@ -1,5 +1,5 @@
 #: import * mandel_layouts
-<MD4Card>
+<MD6Card>
     padding: 4
     size_hint: None, None
     size: dp(400), dp(100)
@@ -8,14 +8,13 @@
     MDRelativeLayout:
 
         MDIconButton:
-            id: root.uuid
+            id: root.searchUuid
             icon: "chevron-right"
             pos_hint: {"top": 1, "right": 1}
-            on_release: root.jump('postPage',[root.uuid])
+            on_release: root.jump(root.searchUuid)
 
         MDLabel:
-            id: title
-            text: root.title
+            text: root.searchTitle
             adaptive_size: True
             color: "black"
             pos: dp(5), dp(60)
@@ -24,8 +23,7 @@
             font_size: 35
 
         MDLabel:
-            id: content
-            text: root.content
+            text: root.searchContent
             adaptive_size: True
             color: "grey"
             pos: dp(12), dp(12)
@@ -64,7 +62,7 @@
 #            right_action_items: [["magnify", lambda x: root.search(),'Search','Search']]
             MDRelativeLayout:
 #                size_hint_y: None
-                height: text_field.height
+                height: searchTextField.height
                 size_hint_x: None
                 width: dp(200)
                 pos_hint: {"center_x": .5, "center_y": .0}
@@ -75,7 +73,7 @@
                     theme_text_color: "Hint"
                     on_release: app.go_back()
                 MDTextField:
-                    id: text_field
+                    id: searchTextField
                     hint_text: "Enter keyword"
                     hint_text_color_normal: 1,1,1,.5
                     hint_text_color_focus: 1,1,1,1
@@ -88,6 +86,6 @@
                 MDIconButton:
                     icon: "magnify"
                     pos_hint: {"center_y": .9}
-                    pos: text_field.width - self.width + dp(8), 0
+                    pos: searchTextField.width - self.width + dp(8), 0
                     theme_text_color: "Hint"
                     on_release: root.search()

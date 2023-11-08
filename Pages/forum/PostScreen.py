@@ -29,9 +29,9 @@ class MD5Card(MDCard):
 
 
 class MD4Card(MDCard):
-    title = StringProperty()
-    content = StringProperty()
-    uuid = StringProperty()
+    postTitle = StringProperty()
+    postContent = StringProperty()
+    postUuid = StringProperty()
 
 
 class PostScreen(Screen):
@@ -83,15 +83,14 @@ class PostScreen(Screen):
         }
         title = postInfo.post_title
         content = postInfo.post_content
-        uuid = postUuid
 
         self.ids.postAndComment.add_widget(
             MD4Card(
                 line_color=(0.2, 0.2, 0.2, 0.8),
                 style='elevated',
-                title=str(title),
-                content=str(content),
-                uuid=uuid,
+                postTitle=title,
+                postContent=content,
+                postUuid=postUuid,
                 md_bg_color='#d4baf5',
                 shadow_softness=2,
                 shadow_offset=(0, 2)

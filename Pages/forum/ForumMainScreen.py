@@ -17,7 +17,7 @@ class MD3Card(MDCard):
     uuid = StringProperty()
 
     def jump2Post(self, postInfo):
-        print(f'postInfo{postInfo}')
+        print(f'postInfo:{postInfo},self.uuid:{self.uuid}')
         appData.app.show_screen('post')
         appData.postScreen.postLoad(self.uuid)
 
@@ -38,7 +38,6 @@ class ForumMainScreen(Screen):
     # name2Page = {'Homepage': '', }
     def reload(self):
         self.ids.listOfPost.clear_widgets()
-        self.ids.listOfPost.refresh_done()
         self.listOfPostLoad()
 
     def menuLoad(self):

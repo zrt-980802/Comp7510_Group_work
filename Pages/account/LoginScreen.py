@@ -15,6 +15,10 @@ class LoginScreen(Screen):
         if checkBox.state == 'down':
             userName = 'admin'
             password = 'admin123'
+        else:
+            self.show_dialog('wrong', 'Please confirm compliance with the treaty')
+            return
+
         if userName == '' or password == '':
             self.show_dialog('wrong', 'can\'t be emtpy!')
             return

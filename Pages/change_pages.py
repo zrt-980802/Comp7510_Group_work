@@ -37,14 +37,15 @@ class MyApp(MDApp):
     def go_back_login(self):
         screenManager = appData.screenManager
         while screenManager.current != 'login':
-            appData.last_screens.pop()
+            appData.app.go_back()
+        del (appData.userInfo)
 
     def show_screen(self, screen_name):
         screenManager = appData.screenManager
 
         ### remember the last screen
         appData.last_screens.append(screenManager.current)
-        print(appData.last_screens)
+        # print(appData.last_screens)
 
         ### set transition effect
         screenManager.transition.direction = 'left'
@@ -55,7 +56,7 @@ class MyApp(MDApp):
     def go_back(self):
         ### get the name of the last screen
         screen_name = appData.last_screens.pop()
-        print(appData.last_screens)
+        # print(appData.last_screens)
 
         screenManager = appData.screenManager
 

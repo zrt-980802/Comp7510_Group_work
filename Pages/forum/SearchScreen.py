@@ -16,13 +16,16 @@ from EndPoint import Data
 from Tools.Global import appData
 
 limitationOfShow = 10
-class MD4Card(MDCard):
-    title = StringProperty()
-    content = StringProperty()
-    uuid = StringProperty()
 
-    def jump(self, pageName, listInfo):
-        print(f'pageName{pageName},listOfInfo{listInfo}')
+
+class MD6Card(MDCard):
+    searchTitle = StringProperty()
+    searchContent = StringProperty()
+    searchUuid = StringProperty()
+
+    def jump(self, postUuid):
+        appData.app.show_screen('post')
+        appData.postScreen.on_start(postUuid)
 
 
 def ifTooLong(content, isTitle=False):
@@ -40,7 +43,7 @@ class SearchScreen(Screen):
         super().__init__(**kw)
 
     def search(self):
-        keyword = self.ids.text_field.text
+        keyword = self.ids.searchTextField.text
         postData = Data.getPostByKeyword(keyword)
         count = 0
         styles = {
@@ -63,12 +66,12 @@ class SearchScreen(Screen):
             uuid = item['post_id']
             print(title + ' ' + content)
             self.ids.searchResult.add_widget(
-                MD4Card(
+                MD6Card(
                     line_color=(0.2, 0.2, 0.2, 0.8),
                     style=style,
-                    title=title,
-                    content=content,
-                    uuid=uuid,
+                    searchTitle=title,
+                    searchContent=content,
+                    searchUuid=uuid,
                     md_bg_color=styles[style],
                     shadow_softness=2 if style == "elevated" else 12,
                     shadow_offset=(0, 1) if style == "elevated" else (0, 2),
