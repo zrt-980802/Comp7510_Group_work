@@ -13,8 +13,8 @@ class LoginScreen(Screen):
         password = self.ids.password_field.text
         checkBox = self.ids.is_remember_for_next_time
         if checkBox.state == 'down':
-            # userName = 'admin'
-            # password = 'admin123'
+            userName = 'admin'
+            password = 'admin123'
             pass
         else:
             self.show_dialog('wrong', 'Please confirm compliance with the treaty')

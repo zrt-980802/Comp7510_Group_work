@@ -21,6 +21,6 @@ class FileSelectScreen(Screen):
         selected = fileList.get_selected()
 
         if len(selected['files']) != 0:
-            appData.userData.fileSelect = selected
-
+            appData.fileSelect = selected
+        appData.createPostScreen.addAnnexSecond()
         appData.app.go_back()

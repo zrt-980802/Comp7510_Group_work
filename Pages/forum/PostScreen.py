@@ -34,6 +34,7 @@ class MD4Card(MDCard):
     postUuid = StringProperty()
 
 
+
 class PostScreen(Screen):
     postUuid = None
 
@@ -96,7 +97,7 @@ class PostScreen(Screen):
                 shadow_offset=(0, 2)
             )
         )
-
+        # todo https://kivymd.readthedocs.io/en/1.1.1/components/imagelist/#module-kivymd.uix.imagelist.imagelist
         for item in commentData:
             count += 1
             style = None

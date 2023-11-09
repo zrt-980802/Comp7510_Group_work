@@ -36,6 +36,21 @@
         helper_text: 'Note: No more than 255 letters'
         mode: 'fill'
         hint_text: 'Content'
+    MDList:
+        id: createPostFile
+        pos_hint: {"center_x": .5, "center_y": 0.3}
+        size_hint_x: .8
+
+        TwoLineRightIconListItem:
+            id: createPostFileSelect
+            text: 'File name'
+            secondary_text: 'File path'
+            IconRightWidget:
+                icon: 'plus'
+                on_release: root.addAnnexFirst()
+            IconRightWidget:
+                icon: 'minus'
+                on_release: root.deleteAnnex()
 
     MDRaisedButton:
         text: "Post"

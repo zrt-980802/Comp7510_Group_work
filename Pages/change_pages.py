@@ -85,15 +85,18 @@ class MyApp(MDApp):
         forumMainScreen = ForumMainScreen(name='mainForum')
         screenManager.add_widget(forumMainScreen)
         screenManager.add_widget(SearchScreen(name='search'))
-        screenManager.add_widget(CreatePostScreen(name='createPost'))
-        screenManager.add_widget(FileSelectScreen(name='fileSelect'))
+        createPostScreen = CreatePostScreen(name='createPost')
+        screenManager.add_widget(createPostScreen)
+        fileSelectScreen = FileSelectScreen(name='fileSelect')
+        screenManager.add_widget(fileSelectScreen)
         postScreen = PostScreen(name='post')
         screenManager.add_widget(postScreen)
 
         appData.postScreen = postScreen
         appData.forumMainScreen = forumMainScreen
         appData.screenManager = screenManager
-
+        appData.fileSelectScreen = fileSelectScreen
+        appData.createPostScreen = createPostScreen
         return screenManager
 
 
