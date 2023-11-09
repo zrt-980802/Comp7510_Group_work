@@ -1,3 +1,4 @@
+import json
 import uuid
 import certifi
 import os
@@ -15,11 +16,9 @@ from Tools.Global import appData
 os.environ['SSL_CERT_FILE'] = certifi.where()
 
 cred_obj = firebase_admin.credentials.Certificate('source/json/token.json')
-
-firebase_admin.initialize_app(cred_obj, {
-    'databaseURL': 'https://comp7510-dbd61-default-rtdb.asia-southeast1.firebasedatabase.app/',
-    'storageBucket': 'comp7510-dbd61.appspot.com'
-})
+with open('source/json/path.json', 'r') as file:
+    firebaseRes = json.load(file)
+firebase_admin.initialize_app(cred_obj, firebaseRes)
 
 dataBasePath = '/server/data'
 db_ref = db.reference('/server/data')
