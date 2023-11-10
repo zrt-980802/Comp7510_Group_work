@@ -59,14 +59,14 @@ class ForumMainScreen(Screen):
         )
 
     def listOfPostLoad(self):
-        postData = Data.getLatestPost(4)
+        postData = Data.getLatestPost()
         count = 0
         styles = {
             "elevated": "#f6eeee", "filled": "#f4dedc", "outlined": "#f8f5f4"
         }
 
         if postData is not None:
-            for item in postData.values():
+            for item in postData:
                 count += 1
                 style = None
                 if count % 3 == 0:
