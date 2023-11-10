@@ -160,9 +160,16 @@ def deleteFile(deleteFilePath):
 def getLatestPost(count=10):
     data_ref = db.reference(dataBasePath + '/postInfo')
     # data = data_ref.order_by_child('post_create_time_num').get()
-    data = data_ref.order_by_key().limit_to_first(count).get()
+    # data = data_ref.order_by_key().limit_to_first(count).get()
+    datas = data_ref.get()
+    list = []
+    for data in datas:
+        tmp = datas[data]
+        tmp['post_create_time_num'] = float(tmp['post_create_time_num'])
+        list.append(tmp)
+    list.sort(key=lambda x: x['post_create_time_num'],reverse=True)
     # print(data)
-    return data
+    return list[0:min(count, len(list))]
 
 
 def getPostByKeyword(keyword):

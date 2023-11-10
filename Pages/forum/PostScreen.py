@@ -14,6 +14,8 @@ from kivy.properties import StringProperty
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.card import MDCard
 from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelThreeLine
+from kivymd.uix.fitimage import FitImage
+from kivymd.uix.imagelist import MDSmartTile
 from kivymd.uix.label import MDLabel
 
 from EndPoint import Data
@@ -32,7 +34,6 @@ class MD4Card(MDCard):
     postTitle = StringProperty()
     postContent = StringProperty()
     postUuid = StringProperty()
-
 
 
 class PostScreen(Screen):
@@ -84,20 +85,32 @@ class PostScreen(Screen):
         }
         title = postInfo.post_title
         content = postInfo.post_content
-
-        self.ids.postAndComment.add_widget(
-            MD4Card(
-                line_color=(0.2, 0.2, 0.2, 0.8),
-                style='elevated',
-                postTitle=title,
-                postContent=content,
-                postUuid=postUuid,
-                md_bg_color='#d4baf5',
-                shadow_softness=2,
-                shadow_offset=(0, 2)
-            )
+        postCard = MD4Card(
+            id='postCard',
+            line_color=(0.2, 0.2, 0.2, 0.8),
+            style='elevated',
+            postTitle=title,
+            postContent=content,
+            postUuid=postUuid,
+            md_bg_color='#d4baf5',
+            shadow_softness=2,
+            shadow_offset=(0, 2)
         )
-        # todo https://kivymd.readthedocs.io/en/1.1.1/components/imagelist/#module-kivymd.uix.imagelist.imagelist
+        self.ids.postAndComment.add_widget(postCard)
+
+        if postInfo.post_annex is not None:
+            print(postInfo.post_annex)
+            postCard.add_widget(
+                FitImage(
+                    source=postInfo.post_annex[1],
+                    # pos_hint={"center_x": .5, "center_y": .5},
+                    # box_color={1, 1, 1, .2},
+                    radius=[12, 12, 12, 12],
+                    # size_hint_y=.25,
+                    size_hint_x=.25,
+
+                )
+            )
         for item in commentData:
             count += 1
             style = None
