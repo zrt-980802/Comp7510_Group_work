@@ -10,6 +10,18 @@ import time
 from datetime import datetime
 
 
+def judgeGreetWord():
+    hour = int(time.localtime().tm_hour)
+    if 5 <= hour <= 11:
+        return 'Good morning'
+    if 12 <= hour <= 12:
+        return 'Good noon!'
+    if 13 <= hour <= 17:
+        return 'Good afternoon!'
+    if 18 <= hour <= 23:
+        return 'Good evening!'
+    return 'Good dawn!'
+
 def nowYMDHMS():
     return str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 

@@ -18,6 +18,8 @@ from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
 
+import EndPoint.CheckInfo as CI
+
 from Tools.Global import appData
 
 os.environ['SSL_CERT_FILE'] = certifi.where()
@@ -42,7 +44,8 @@ class MyApp(MDApp):
         screenManager = appData.screenManager
         while screenManager.current != 'login':
             appData.app.go_back()
-        del (appData.userInfo)
+        if CI.checkLogin():
+            del (appData.userInfo)
 
     def show_screen(self, screen_name):
         screenManager = appData.screenManager
