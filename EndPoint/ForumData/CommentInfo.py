@@ -1,7 +1,3 @@
-from time import time
-
-from faker import Faker
-
 
 class CommentInfo:
     type_name = 'commentInfo'

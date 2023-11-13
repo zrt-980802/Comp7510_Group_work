@@ -8,9 +8,7 @@
 """
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import Screen
-from kivymd.uix.button import MDIconButton
 from kivymd.uix.card import MDCard
-from kivymd.uix.relativelayout import MDRelativeLayout
 
 from EndPoint import Data
 from Tools.Global import appData

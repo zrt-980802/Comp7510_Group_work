@@ -11,8 +11,6 @@ import firebase_admin
 from firebase_admin import db, storage
 
 from Tools import NowTime
-from Tools.Global import appData
-
 os.environ['SSL_CERT_FILE'] = certifi.where()
 
 cred_obj = firebase_admin.credentials.Certificate('source/json/token.json')
@@ -25,12 +23,6 @@ db_ref = db.reference('/server/data')
 bucket = storage.bucket()
 userIdNameRelationship = 'UINR'
 userIdCommentIdRelationship = 'UICR'
-
-
-# def to_json(data):
-#     # return json.dumps(self, cls=MyEncoder, indent=4)
-#     print(data.__dict__)
-#     return json.dumps(data.__dict__)
 
 
 def setInfo(info):

@@ -10,6 +10,8 @@ from Tools.Global import appData
 
 
 def checkLogin():
-    userInfo = appData.userInfo
-    if userInfo is None:
-        return False
+    if hasattr(appData, 'userInfo'):
+        print("True")
+        return True
+    print("False")
+    return False

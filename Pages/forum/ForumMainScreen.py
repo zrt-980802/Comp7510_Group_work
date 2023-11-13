@@ -1,13 +1,13 @@
 from kivy.metrics import dp
 from kivy.properties import StringProperty
-from kivy.uix.image import AsyncImage
 from kivy.uix.screenmanager import Screen
+from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.card import MDCard
-from kivymd.uix.label import MDLabel
+from kivymd.uix.dialog import MDDialog
 from kivymd.uix.menu import MDDropdownMenu
-from kivymd.font_definitions import theme_font_styles
 
 from EndPoint import Data
+import EndPoint.CheckInfo as CI
 from Tools.Global import appData
 
 
@@ -102,7 +102,10 @@ class ForumMainScreen(Screen):
 
     def menu_callback(self, button):
         if button == MenuListName[0]:
-            appData.app.show_screen('createPost')
+            if CI.checkLogin():
+                appData.app.show_screen('createPost')
+            else:
+                self.show_dialog('Not logged in', 'Please sign in')
         if button == MenuListName[1]:
             appData.app.go_back_login()
         if button == MenuListName[2]:
@@ -110,3 +113,15 @@ class ForumMainScreen(Screen):
         if button == MenuListName[3]:
             self.reload()
         self.menu.dismiss()
+
+    def show_dialog(self, title, text):
+        dialog = MDDialog(
+            title=title,
+            text=text,
+            buttons=[
+                MDRaisedButton(
+                    text='confirm',
+                    on_press=lambda x: dialog.dismiss()),
+            ]
+        )
+        dialog.open()

@@ -8,7 +8,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'source/pic/43916.jpg'
+#            source: 'source/pic/login.png'
 
 
     Column:
@@ -33,7 +33,6 @@
             id: password_field
             hint_text: 'Password'
             password: True
-            helper_text: 'Note: At least 6 characters long but 14 or more.'
             helper_text_mode: "on_focus"
 
         MDBoxLayout:
@@ -52,21 +51,34 @@
 
         MDBoxLayout:
             adaptive_height: True
-            orientation: 'horizontal'
+            orientation: 'vertical'#'horizontal'
 #            padding: dp(5)
             spacing: dp(20)
 
             MDRaisedButton:
                 text: "Sign in"
                 md_bg_color: "#42A5F5"
-                pos_hint: {'left': 1}
-                size_hint: (0.4,1)
+                pos_hint: {'center_x': 0.5}
+                size_hint: (1,0.7)
                 on_press: root.login()
+            MDBoxLayout:
+                adaptive_height: True
+                orientation: 'horizontal'
+                spacing: dp(10)
+                MDRaisedButton:
+                    text: "Register"
+                    md_bg_color: "#ABB2B9"
+                    pos_hint: {'left': 1}
+                    size_hint: (1,0.7)
+                    on_press: app.show_screen('register')
 
-            MDRaisedButton:
-                text: "Register"
-                md_bg_color: "#ABB2B9"
-                on_press: app.show_screen('register')
+                MDRaisedButton:
+                    text: 'Guest log in'
+                    md_bg_color: "#ABB2B9"
+                    pos_hint: {'right': 1}
+                    size_hint: (1,0.7)
+                    on_press: root.guestLogin()
+
 
 
 

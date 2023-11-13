@@ -6,20 +6,19 @@
 @IDE ：PyCharm
 @Motto：ABC(Always Be Coding)
 """
-import os
 import uuid
 
-from kivy.metrics import dp
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import Screen
+from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.card import MDCard
-from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelThreeLine
+from kivymd.uix.dialog import MDDialog
 from kivymd.uix.fitimage import FitImage
-from kivymd.uix.imagelist import MDSmartTile
-from kivymd.uix.label import MDLabel
 
 from EndPoint import Data
 from EndPoint.ForumData.CommentInfo import CommentInfo
+import EndPoint.CheckInfo as CI
+
 from Tools import NowTime
 from Tools.Global import appData
 
@@ -45,8 +44,11 @@ class PostScreen(Screen):
         appData.app.go_back()
 
     def reply(self):
-        print('reply')
-        # 加入当前对话
+        if CI.checkLogin() is False:
+            self.show_dialog('Not logged in', 'Please sign in')
+            return
+
+        # do reply
         replyContent = self.ids.replyComment.text
         userInfo = appData.userInfo
         commentUserName = userInfo.user_nick_name
@@ -103,10 +105,7 @@ class PostScreen(Screen):
             postCard.add_widget(
                 FitImage(
                     source=postInfo.post_annex[1],
-                    # pos_hint={"center_x": .5, "center_y": .5},
-                    # box_color={1, 1, 1, .2},
                     radius=[12, 12, 12, 12],
-                    # size_hint_y=.25,
                     size_hint_x=.25,
 
                 )
@@ -138,3 +137,15 @@ class PostScreen(Screen):
     def on_start(self, postUuid):
         self.postLoad(postUuid)
         print('PostScreen on_start...')
+
+    def show_dialog(self, title, text):
+        dialog = MDDialog(
+            title=title,
+            text=text,
+            buttons=[
+                MDRaisedButton(
+                    text='confirm',
+                    on_press=lambda x: dialog.dismiss()),
+            ]
+        )
+        dialog.open()

@@ -3,11 +3,15 @@ from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.dialog import MDDialog
 
 from EndPoint import Data
-from Tools.Encryption import desEncrypt, desDecrypt
+from Tools.Encryption import desEncrypt
 from Tools.Global import appData
 
 
 class LoginScreen(Screen):
+    def guestLogin(self):
+        appData.app.show_screen('mainForum')
+        appData.forumMainScreen.on_start()
+
     def login(self):
         userName = self.ids.user_name_field.text
         password = self.ids.password_field.text

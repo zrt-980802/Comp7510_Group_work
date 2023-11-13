@@ -10,7 +10,7 @@ class UserInfo:
     user_name: str
     user_nick_name: str
     user_password: str
-    user_phone_number:str
+    user_phone_number: str
     user_email: str
     user_auth_role: str
     user_head_portrait: list

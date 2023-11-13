@@ -37,7 +37,9 @@ class CreatePostScreen(Screen):
 
     def createPost(self):
         if CI.checkLogin() is False:
-            appData.app.go_back_login()
+            self.show_dialog('Not logged in','Please sign in')
+            appData.app.go_back()
+            return
 
         title = self.ids.titleField.text
         content = self.ids.contentField.text
@@ -66,6 +68,7 @@ class CreatePostScreen(Screen):
         except Exception:
             Data.deleteInfo(newPost)
         appData.app.go_back()
+        appData.forumMainScreen.reload()
 
     def show_dialog(self, title, text):
         dialog = MDDialog(
