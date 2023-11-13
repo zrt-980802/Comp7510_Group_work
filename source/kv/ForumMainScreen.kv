@@ -13,7 +13,7 @@
             pos_hint: {"top": 1, "right": 1}
             on_release: root.jump2Post(root.uuid)
 
-        MDLabel:
+        ForumMainMDLabel:
             id: title
             text: root.title
             adaptive_size: True
@@ -23,7 +23,7 @@
             font_style: 'H6'
             font_size: 35
 
-        MDLabel:
+        ForumMainMDLabel:
             id: content
             text: root.content
             adaptive_size: True
@@ -68,3 +68,5 @@
                 ["refresh", lambda x: root.menu_callback('refresh'),'refresh','refresh'],
                 ]
 
+<ForumMainMDLabel@MDLabel>
+    font_name: 'myFort'

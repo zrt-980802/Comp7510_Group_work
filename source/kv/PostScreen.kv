@@ -18,7 +18,7 @@
 #            pos_hint: {"top": 1, "right": 1}
 ##            on_release: root.reply()
 
-        MDLabel:
+        PostMDLabel:
             text: root.commentUserName
             adaptive_size: True
             color: "black"
@@ -27,7 +27,7 @@
             font_style: 'H6'
             font_size: 30
 
-        MDLabel:
+        PostMDLabel:
             text: root.commentContent
             adaptive_size: True
             color: "grey"
@@ -39,6 +39,7 @@
             text_size: self.width, None
             size_hint: 0.95, None
             height: self.texture_size[1]
+
 <MD4Card>
     padding: 4
     size_hint: None, None
@@ -57,7 +58,7 @@
 #            pos_hint: {"top": 1, "right": 1}
 #            on_release: root.jump('postPage',[root.uuid])
 
-        MDLabel:
+        PostMDLabel:
             text: root.postTitle
             color: "black"
             pos: dp(5), dp(35)
@@ -65,7 +66,7 @@
             font_size: 35
 #            size_hint_x: 0.60
 
-        MDLabel:
+        PostMDLabel:
             text: root.postContent
             color: "grey"
             pos: dp(12), dp(0)
@@ -98,7 +99,7 @@
             pos_hint: {'center_x': .5, 'center_y': 0.95}
             left_action_items: [["arrow-left", lambda x: root.quit()]]
 
-    MDTextField:
+    PostMDTextField:
         id: replyComment
         hint_text: "Reply"
         helper_text: "No more than 35 letters."
@@ -107,6 +108,7 @@
         size_hint_x: .8
         max_text_length: 135
         background_color: '#6da0f2'
+
     MDIconButton:
         icon: 'arrow-top-right'
         pos_hint: {'center_x': .85, 'center_y': 0.05}
@@ -114,3 +116,9 @@
 
 
 #                pos_hint: {'center_x': .5, 'center_y': 0.15}
+
+<PostMDLabel@MDLabel>
+    font_name: 'myFort'
+
+<PostMDTextField@MDTextField>
+    font_name: 'myFort'

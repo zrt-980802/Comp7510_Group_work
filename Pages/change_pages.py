@@ -3,6 +3,8 @@ import logging
 import certifi
 import os
 
+from kivy.core.text import LabelBase
+
 from EndPoint import Data
 from Pages.account.LoginScreen import LoginScreen
 from Pages.account.RegisterScreen import RegisterScreen
@@ -20,7 +22,7 @@ from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
 
-from Tools.Global import appData, AppData
+from Tools.Global import appData
 
 ch = logging.StreamHandler()
 ch.setLevel(logging.WARNING)
@@ -31,6 +33,9 @@ if platform in ('win', 'macosx'):
 
 appData.last_screens = []
 
+# Chinese support
+
+LabelBase.register('myFort','source/fort/DroidSansFallback.ttf')
 
 class MyApp(MDApp):
 

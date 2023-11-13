@@ -10,7 +10,7 @@
             size: self.size
 #            source: 'source/pic/93375.jpg'
 
-    MDLabel:
+    CreateMDLabel:
         id: label
         text: 'Create post'
         pos_hint: {"center_x": .2, "center_y": 0.85}
@@ -36,6 +36,7 @@
         helper_text: 'Note: No more than 255 letters'
         mode: 'fill'
         hint_text: 'Content'
+
     MDList:
         id: createPostFile
         pos_hint: {"center_x": .5, "center_y": 0.3}
@@ -73,3 +74,7 @@
     line_color_focus: 1,1,1,1
     text_color_normal: 0,0,0.0,.7
     text_color_focus: 0,0,0.0,1
+    font_name: 'myFort'
+
+<CreateMDLabel@MDLabel>
+    font_name: 'myFort'

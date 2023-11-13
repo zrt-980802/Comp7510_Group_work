@@ -21,7 +21,7 @@
     #    spacing: dp(20)
 
 
-        MDLabel:
+        RegisterMDLabel:
             id: label
             text: 'Sign Up'
             font_size: dp(40)
@@ -29,27 +29,27 @@
             halign: 'center'
 
         ###Widget:
-        SignUpTextField:
+        RegisterTextField:
             id: user_name_field
             hint_text: 'User Name'
 
-        SignUpTextField:
+        RegisterTextField:
             id: email_field
             hint_text: 'Email'
 
-        SignUpTextField:
+        RegisterTextField:
             id: password_field
             hint_text: 'Password'
             password: True
             helper_text: 'Note: At least 6 characters long but 14 or more.'
             helper_text_mode: "on_focus"
 
-        SignUpTextField:
+        RegisterTextField:
             id: re_password_field
             hint_text: 'Re-Password'
             password: True
 
-        SignUpTextField:
+        RegisterTextField:
             id: phone_number_field
             hint_text: 'Phone Number'
 
@@ -59,7 +59,7 @@
             Check:
                 active: False
 #                pos_hint: {'center_x': .4, 'center_y': .5}
-            MDLabel:
+            RegisterMDLabel:
                 id: is_follow_register_rule
                 text: 'I agree to the terms and conditions and the privacy policy'
                 font_size: dp(10)
@@ -96,13 +96,17 @@
             id: toolbar
             left_action_items: [["arrow-left", lambda x: app.go_back()]]
 
-<SignUpTextField@MDTextField>
+<RegisterTextField@MDTextField>
     hint_text_color_normal: 1,1,1,.5
     hint_text_color_focus: 1,1,1,1
     line_color_normal: 1,1,1,.5
     line_color_focus: 1,1,1,1
     text_color_normal: 1,1,1,.7
     text_color_focus: 1,1,1,1
+    font_name: 'myFort'
+
+<RegisterMDLabel@MDLabel>
+    font_name: 'myFort'
 
 <Check@MDCheckbox>:
     group: 'group'

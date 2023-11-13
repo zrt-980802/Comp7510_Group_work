@@ -17,7 +17,7 @@
         padding: dp(100)
         spacing: dp(20)
 
-        MDLabel:
+        LoginMDLabel:
             id: label
             text: 'Sign In'
             font_size: dp(40)
@@ -43,7 +43,7 @@
                 id: is_remember_for_next_time
                 active: False
 #                pos_hint: {'center_x': .4, 'center_y': .5}
-            MDLabel:
+            LoginMDLabel:
                 id: label
                 text: 'I agree to the terms and conditions and the privacy policy'
                 font_size: dp(10)
@@ -81,8 +81,12 @@
     line_color_focus: 1,1,1,1
     text_color_normal: 1,1,1,.7
     text_color_focus: 1,1,1,1
+    font_name: 'myFort'
 
 <Check@MDCheckbox>:
     group: 'group'
     size_hint: None, None
     size: dp(48), dp(48)
+
+<LoginMDLabel@MDLabel>
+    font_name: 'myFort'
