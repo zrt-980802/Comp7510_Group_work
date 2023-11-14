@@ -21,26 +21,26 @@ class LoginScreen(Screen):
             password = 'admin123'
             pass
         else:
-            self.show_dialog('wrong', 'Please confirm compliance with the treaty')
+            self.show_dialog('Error', 'Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy')
             return
 
         if userName == '' or password == '':
-            self.show_dialog('wrong', 'can\'t be emtpy!')
+            self.show_dialog('Error', 'Username and password cannot be empty')
             return
         else:
             request_rel = Data.isUserNameExist(userName)
 
         if request_rel[0] is False:
-            self.show_dialog('wrong', 'Username not exits!')
+            self.show_dialog('Error', 'Username does not exist')
             return
 
         userId = request_rel[1]
         userInfo = Data.getUserInfoById(userId)
         enPassword = desEncrypt(password)
         if enPassword != userInfo.user_password:
-            self.show_dialog('wrong', 'Username or password is wrong!')
+            self.show_dialog('Error', 'Wrong username or password')
             return
-        self.show_dialog('success', 'login successful!')
+        self.show_dialog('Success', 'Login successful')
         appData.userInfo = userInfo
         appData.app.show_screen('mainForum')
         appData.forumMainScreen.on_start()
@@ -51,7 +51,7 @@ class LoginScreen(Screen):
             text=text,
             buttons=[
                 MDRaisedButton(
-                    text='confirm',
+                    text='Confirm',
                     on_press=lambda x: dialog.dismiss()),
             ]
         )
