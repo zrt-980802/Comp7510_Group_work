@@ -1,0 +1,58 @@
+#: import * mandel_layouts
+<MD7Card>
+    padding: 4
+    size_hint: None, None
+    size: dp(400), dp(100)
+#    padding: 0, 0, 0, "16dp"
+    on_release: root.jump(root.myPostUuid)
+
+    MDRelativeLayout:
+
+#        MDIconButton:
+#            id: root.myPostUuid
+#            icon: "chevron-right"
+#            pos_hint: {"top": 1, "right": 1}
+#            on_release: root.jump(root.myUuid)
+
+        MDIconButton:
+            icon: 'delete'
+            pos_hint: {"top": 1, "right": 1.0}
+            on_release: root.delete(root.myPostUuid)
+
+        MyPostMDLabel:
+            text: root.myPostTitle
+            adaptive_size: True
+            color: "black"
+            pos: dp(5), dp(60)
+            bold: True
+            font_style: 'H6'
+            font_size: 35
+
+        MyPostMDLabel:
+            text: root.myPostContent
+            adaptive_size: True
+            color: "grey"
+            pos: dp(12), dp(12)
+            bold: True
+            font_style: 'Body1'
+            font_size: 20
+<MyPostScreen>:
+    RecycleView:
+        scroll_y: 0.5
+        pos_hint: {"center_x": .5, "center_y": .5}
+        size_hint_y: .70
+        Column:
+            id: listOfPost
+            adaptive_height: True
+            spacing: "16dp"
+
+
+    Column:
+        MDTopAppBar:
+            id: toolbar
+            pos_hint: {'center_x': .5, 'center_y': 0.95}
+            left_action_items: [["arrow-left", lambda x: root.quit()]]
+
+
+<MyPostMDLabel@MDLabel>
+    font_name: 'myFort'

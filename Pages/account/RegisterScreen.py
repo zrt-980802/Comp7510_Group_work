@@ -97,7 +97,7 @@ class RegisterScreen(Screen):
         else:
             self.show_dialog(infoList[1], infoList[2])
             userInfo = UserInfo()
-            userInfo.user_id = str(uuid.uuid1())
+            userInfo.user_id = 'user:'+str(uuid.uuid1())
             userInfo.user_name = self.ids.user_name_field.text
             faker = Faker()
             userInfo.user_nick_name = faker.name()

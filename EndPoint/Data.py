@@ -11,6 +11,7 @@ import firebase_admin
 from firebase_admin import db, storage
 
 from Tools import NowTime
+
 os.environ['SSL_CERT_FILE'] = certifi.where()
 
 cred_obj = firebase_admin.credentials.Certificate('source/json/token.json')
@@ -23,6 +24,7 @@ db_ref = db.reference('/server/data')
 bucket = storage.bucket()
 userIdNameRelationship = 'UINR'
 userIdCommentIdRelationship = 'UICR'
+userIdPostIdRelationship = 'UIPR'
 
 
 def setInfo(info):
@@ -85,7 +87,7 @@ def getUserInfoById(userId: str):
     return userInfo
 
 
-def getPostInfoById(postId: str):
+def getPostInfoByPostId(postId: str):
     """
     :param postId:
     :return: dict
@@ -93,6 +95,8 @@ def getPostInfoById(postId: str):
     data = getInfo(postId, PostInfo.type_name)
     postInfo = PostInfo()
     postInfo.__dict__.update(data)
+    if postInfo.post_state == '-1':
+        return None
     return postInfo
 
 
@@ -157,9 +161,11 @@ def getLatestPost(count=10):
     list = []
     for data in datas:
         tmp = datas[data]
+        if tmp['post_state'] == '-1':
+            continue
         tmp['post_create_time_num'] = float(tmp['post_create_time_num'])
         list.append(tmp)
-    list.sort(key=lambda x: x['post_create_time_num'],reverse=True)
+    list.sort(key=lambda x: x['post_create_time_num'], reverse=True)
     # print(data)
     return list[0:min(count, len(list))]
 
@@ -173,6 +179,8 @@ def getPostByKeyword(keyword):
         # print(data)
         if keyword in datas[data]['post_title']:
             # print(data)
+            if datas[data]['post_state'] == '-1':
+                continue
             result.append(datas[data])
     return result
 
@@ -207,3 +215,34 @@ def setUserIdCommentIdRelationship(postId, userId, commentId):
 def deleteUserIdCommentIdRelationshipByCommentId(postId, userId, commentId):
     data_ref = db_ref.child(userIdCommentIdRelationship).child(postId).child(userId).child(commentId)
     data_ref.delete()
+
+
+def setUserIdPostIdRelationshipByUserId(userId, postId):
+    data_ref = db_ref.child(userIdPostIdRelationship).child(userId).child(postId)
+    data_ref.set(NowTime.nowYMDHMS())
+
+
+def getUserIdPostIdRelationshipByUserId(userId):
+    data_ref = db_ref.child(userIdPostIdRelationship).child(userId)
+    return data_ref.get()
+
+
+def deleteUserIdPostIdRelationshipByUserId(userId, postId):
+    data_ref = db_ref.child(userIdPostIdRelationship).child(userId).child(postId)
+    data_ref.delete()
+
+
+def deletePostByPostIdAndHide(postId):
+    data_ref = db_ref.child('postInfo').child(postId).child('post_state')
+    data_ref.set('-1')
+
+
+def getAllPostByUserId(userId):
+    datas = getUserIdPostIdRelationshipByUserId(userId)
+    result = []
+    for data in datas:
+        postInfo = getPostInfoByPostId(data)
+
+        if postInfo is not None and postInfo.post_state == '0':
+            result.append(postInfo)
+    return result
