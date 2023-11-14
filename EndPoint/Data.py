@@ -159,6 +159,8 @@ def getLatestPost(count=10):
     # data = data_ref.order_by_key().limit_to_first(count).get()
     datas = data_ref.get()
     list = []
+    if datas is None:
+        return None
     for data in datas:
         tmp = datas[data]
         if tmp['post_state'] == '-1':
