@@ -11,6 +11,7 @@ from Pages.forum.ForumMainScreen import ForumMainScreen
 from Pages.forum.MyPostScreen import MyPostScreen
 from Pages.forum.SearchScreen import SearchScreen
 from Pages.forum.PostScreen import PostScreen
+from Pages.forum.ProfileScreen import ProfileScreen
 
 from kivy.core.text import LabelBase
 from kivy.core.window import Window
@@ -36,7 +37,7 @@ appData.last_screens = []
 
 # Chinese support
 
-LabelBase.register('myFort', 'source/fort/DroidSansFallback.ttf')
+LabelBase.register('myFont', 'source/font/DroidSansFallback.ttf')
 
 
 class MyApp(MDApp):
@@ -71,6 +72,7 @@ class MyApp(MDApp):
         Builder.load_file('source/kv/FileSelectScreen.kv')
         Builder.load_file('source/kv/PostScreen.kv')
         Builder.load_file('source/kv/MyPostScreen.kv')
+        Builder.load_file('source/kv/ProfileScreen.kv')
 
         screenManager = ScreenManager()
         screenManager.add_widget(LoginScreen(name='login'))
@@ -86,6 +88,8 @@ class MyApp(MDApp):
         screenManager.add_widget(postScreen)
         myPostScreen = MyPostScreen(name='myPost')
         screenManager.add_widget(myPostScreen)
+        profileScreen = ProfileScreen(name='profile')
+        screenManager.add_widget(profileScreen)
 
         appData.postScreen = postScreen
         appData.forumMainScreen = forumMainScreen
@@ -93,6 +97,7 @@ class MyApp(MDApp):
         appData.fileSelectScreen = fileSelectScreen
         appData.createPostScreen = createPostScreen
         appData.myPostScreen = myPostScreen
+        appData.profileScreen = profileScreen
         return screenManager
 
 
