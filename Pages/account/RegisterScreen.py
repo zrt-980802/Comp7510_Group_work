@@ -36,17 +36,17 @@ class RegisterScreen(Screen):
                 if i == '@' or i == '$' or i == '_':
                     sig[3] += 1
         else:
-            return [False, 'password is too short']
+            return [False, 'Password too short']
 
         if sum(sig) != len(password):
-            return [False, 'Valid Password']
+            return [False, 'Invalid password format']
 
         counter = 0
         for item in sig:
             if item == 0:
                 counter += 1
         if counter >= 3:
-            return [False, 'At least two Type']
+            return [False, 'Password must contain at least 2 kinds of characters']
 
         return [True, 'No problem']
 
@@ -65,17 +65,17 @@ class RegisterScreen(Screen):
         phone_number = self.ids.phone_number_field.text
         print(f'{user_name},{email},{password},{re_password},{phone_number}')
         if user_name == '' or email == '' or password == '' or re_password == '' or phone_number == '':
-            return [False, 'wrong', 'can\'t fill with blank.']
+            return [False, 'Error', 'Please fill in all blanks']
         if Data.isUserNameExist(user_name)[0] is True:
-            return [False, 'wrong', 'Username already exits']
+            return [False, 'Error', 'Username already exists']
         if re_password != password:
-            return [False, 'wrong', 'two password is not same.']
+            return [False, 'Error', 'Password mismatch']
         checkPasswordInfo = self.passwordChecker(password)
         if checkPasswordInfo[0]:
             if not self.emailChecker(email):
-                return [False, 'wrong', 'Email format error.']
+                return [False, 'Error', 'Email format error']
 
-        return [True, 'success', 'welcome to app!']
+        return [True, 'Success', 'Welcome to the app!']
 
     def show_dialog(self, title, text):
         dialog = MDDialog(
@@ -83,7 +83,7 @@ class RegisterScreen(Screen):
             text=text,
             buttons=[
                 MDRaisedButton(
-                    text='confirm',
+                    text='Confirm',
                     on_press=lambda x: dialog.dismiss()),
             ]
         )
