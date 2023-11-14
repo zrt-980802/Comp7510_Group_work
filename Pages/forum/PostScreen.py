@@ -67,7 +67,7 @@ class PostScreen(Screen):
         )
         # 存入数据库
         newComment = CommentInfo()
-        newComment.comment_id = str(uuid.uuid1())
+        newComment.comment_id = 'comment:' + str(uuid.uuid1())
         newComment.comment_content = commentContent
         newComment.comment_is_comment_to_topic = True
         newComment.comment_creator_user_id = userInfo.user_id
@@ -79,7 +79,12 @@ class PostScreen(Screen):
 
     def postLoad(self, postUuid):
         self.postUuid = postUuid
-        postInfo = Data.getPostInfoById(postUuid)
+        postInfo = Data.getPostInfoByPostId(postUuid)
+        # if this post is deleted ,show dialog
+        if postInfo is None:
+            self.show_dialog('Wrong', 'This post is missing...')
+            appData.app.go_back()
+            return
         commentData = Data.getLatestComment(postUuid)
         count = 0
         styles = {

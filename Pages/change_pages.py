@@ -8,6 +8,7 @@ from Pages.account.RegisterScreen import RegisterScreen
 from Pages.file.FileSelectScreen import FileSelectScreen
 from Pages.forum.CreatePostScreen import CreatePostScreen
 from Pages.forum.ForumMainScreen import ForumMainScreen
+from Pages.forum.MyPostScreen import MyPostScreen
 from Pages.forum.SearchScreen import SearchScreen
 from Pages.forum.PostScreen import PostScreen
 
@@ -17,6 +18,8 @@ from kivy.utils import platform
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
+
+import EndPoint.CheckInfo as CI
 
 from Tools.Global import appData
 
@@ -42,7 +45,8 @@ class MyApp(MDApp):
         screenManager = appData.screenManager
         while screenManager.current != 'login':
             appData.app.go_back()
-        del (appData.userInfo)
+        if CI.checkLogin():
+            del (appData.userInfo)
 
     def show_screen(self, screen_name):
         screenManager = appData.screenManager
@@ -66,6 +70,7 @@ class MyApp(MDApp):
         Builder.load_file('source/kv/CreatePostScreen.kv')
         Builder.load_file('source/kv/FileSelectScreen.kv')
         Builder.load_file('source/kv/PostScreen.kv')
+        Builder.load_file('source/kv/MyPostScreen.kv')
 
         screenManager = ScreenManager()
         screenManager.add_widget(LoginScreen(name='login'))
@@ -79,12 +84,15 @@ class MyApp(MDApp):
         screenManager.add_widget(fileSelectScreen)
         postScreen = PostScreen(name='post')
         screenManager.add_widget(postScreen)
+        myPostScreen = MyPostScreen(name='myPost')
+        screenManager.add_widget(myPostScreen)
 
         appData.postScreen = postScreen
         appData.forumMainScreen = forumMainScreen
         appData.screenManager = screenManager
         appData.fileSelectScreen = fileSelectScreen
         appData.createPostScreen = createPostScreen
+        appData.myPostScreen = myPostScreen
         return screenManager
 
 

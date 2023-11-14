@@ -37,7 +37,7 @@ class CreatePostScreen(Screen):
 
     def createPost(self):
         if CI.checkLogin() is False:
-            self.show_dialog('Not logged in','Please sign in')
+            self.show_dialog('Not logged in', 'Please sign in')
             appData.app.go_back()
             return
 
@@ -65,10 +65,17 @@ class CreatePostScreen(Screen):
 
         try:
             Data.setInfo(newPost)
+            Data.setUserIdPostIdRelationshipByUserId(newPost.post_creator_user_id, newPost.post_id)
         except Exception:
             Data.deleteInfo(newPost)
         appData.app.go_back()
         appData.forumMainScreen.reload()
+
+        # clear
+        self.ids.titleField.text = ''
+        self.ids.contentField.text = ''
+        self.ids.createPostFileSelect.text = ''
+        self.ids.createPostFileSelect.secondary_text = ''
 
     def show_dialog(self, title, text):
         dialog = MDDialog(

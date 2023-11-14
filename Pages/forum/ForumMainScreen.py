@@ -8,6 +8,7 @@ from kivymd.uix.menu import MDDropdownMenu
 
 from EndPoint import Data
 import EndPoint.CheckInfo as CI
+from Tools import NowTime
 from Tools.Global import appData
 
 
@@ -31,7 +32,7 @@ def ifTooLong(content, isTitle=False):
     return content
 
 
-MenuListName = ['Create post', 'quit', 'Search', 'refresh']
+MenuListName = ['Create post', 'quit', 'Search', 'refresh', 'my post']
 
 
 class ForumMainScreen(Screen):
@@ -40,10 +41,13 @@ class ForumMainScreen(Screen):
         self.ids.listOfPost.clear_widgets()
         self.listOfPostLoad()
 
-    def menuLoad(self):
+    def menuAndLoginNameLoad(self):
+        # menu loading
         menu_list = [  # ['Homepage', 'home-account'],
             [MenuListName[0], 'note-plus-outline'],
-            [MenuListName[1], 'location-exit']]
+            [MenuListName[4], 'menu'],
+            [MenuListName[1], 'location-exit'],
+        ]
         menu_items = [
             {
                 "viewclass": "OneLineListItem",
@@ -57,6 +61,12 @@ class ForumMainScreen(Screen):
             items=menu_items,
             width_mult=4,
         )
+        # login name loading
+        loginNameText = 'Traveler'
+        if CI.checkLogin():
+            loginNameText = appData.userInfo.user_nick_name
+        self.ids.loginName.text = loginNameText
+        self.ids.greetWord.text = NowTime.judgeGreetWord()
 
     def listOfPostLoad(self):
         postData = Data.getLatestPost()
@@ -93,7 +103,7 @@ class ForumMainScreen(Screen):
 
     def on_start(self):
         self.menu = None
-        self.menuLoad()
+        self.menuAndLoginNameLoad()
         self.listOfPostLoad()
 
     def callback(self, button):
@@ -112,6 +122,12 @@ class ForumMainScreen(Screen):
             appData.app.show_screen('search')
         if button == MenuListName[3]:
             self.reload()
+        if button == MenuListName[4]:
+            if CI.checkLogin():
+                appData.app.show_screen('myPost')
+                appData.myPostScreen.listOfPostLoad()
+            else:
+                self.show_dialog('Not logged in', 'Please sign in')
         self.menu.dismiss()
 
     def show_dialog(self, title, text):

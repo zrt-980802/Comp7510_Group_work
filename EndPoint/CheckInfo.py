@@ -11,7 +11,7 @@ from Tools.Global import appData
 
 def checkLogin():
     if hasattr(appData, 'userInfo'):
-        print("True")
+        print("Check Login: True")
         return True
-    print("False")
+    print("Check Login: False")
     return False
