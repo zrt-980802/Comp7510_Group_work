@@ -12,3 +12,9 @@ from Tools.Global import appData
 class ProfileScreen(Screen):
     def quit(self):
         appData.app.go_back()
+
+    def getProfile(self):
+        self.ids.userName.text = 'Username: ' + appData.userInfo.user_name
+        self.ids.userNickName.text = 'Nickname: ' + appData.userInfo.user_nick_name
+        self.ids.userPhoneNumber.text = 'Phone Number: ' + appData.userInfo.user_phone_number
+        self.ids.userEmail.text = 'E-mail: ' + appData.userInfo.user_email
