@@ -40,7 +40,7 @@ def ifTooLong(content, isTitle=False):
     return content
 
 
-MenuListName = ['Create post', 'quit', 'Search', 'refresh', 'my post']
+MenuListName = ['New post', 'Quit', 'Search', 'Refresh', 'My post', 'Profile']
 
 
 class ForumMainScreen(Screen):
@@ -54,6 +54,7 @@ class ForumMainScreen(Screen):
         menu_list = [  # ['Homepage', 'home-account'],
             [MenuListName[0], 'note-plus-outline'],
             [MenuListName[4], 'menu'],
+            [MenuListName[5], 'profile'],
             [MenuListName[1], 'location-exit'],
         ]
         menu_items = [
@@ -137,6 +138,8 @@ class ForumMainScreen(Screen):
                 appData.myPostScreen.listOfPostLoad()
             else:
                 self.show_dialog('Not logged in', 'Please sign in')
+        if button == MenuListName[5]:
+            appData.app.show_screen('profile')
         self.menu.dismiss()
 
     def show_dialog(self, title, text):
