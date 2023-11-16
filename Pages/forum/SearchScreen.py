@@ -27,9 +27,9 @@ class MD6Card(MDCard):
 
 
 def ifTooLong(content, isTitle=False):
-    changeSize = 55
+    changeSize = 50
     if isTitle is True:
-        changeSize = 30
+        changeSize = 26
     if len(content) > changeSize:
         content = content[0:changeSize] + '...'
     return content
@@ -37,10 +37,15 @@ def ifTooLong(content, isTitle=False):
 
 class SearchScreen(Screen):
 
-    def __init__(self, **kw):
-        super().__init__(**kw)
+    def quit(self):
+        # clear
+        self.ids.searchResult.clear_widgets()
+        appData.app.go_back()
 
     def search(self):
+        # clear
+        self.ids.searchResult.clear_widgets()
+
         keyword = self.ids.searchTextField.text
         postData = Data.getPostByKeyword(keyword)
         count = 0

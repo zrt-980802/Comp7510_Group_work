@@ -77,6 +77,9 @@ class PostScreen(Screen):
         Data.setInfo(newComment)
         Data.setUserIdCommentIdRelationship(self.postUuid, userInfo.user_id, newComment.comment_id)
 
+        # clear
+        self.ids.replyComment.text = ''
+
     def postLoad(self, postUuid):
         self.postUuid = postUuid
         postInfo = Data.getPostInfoByPostId(postUuid)

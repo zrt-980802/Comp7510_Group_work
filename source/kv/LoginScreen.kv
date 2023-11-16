@@ -65,18 +65,20 @@
                 adaptive_height: True
                 orientation: 'horizontal'
                 spacing: dp(10)
-                MDRaisedButton:
+                MDTextButton:
                     text: "Register"
-                    md_bg_color: "#ABB2B9"
+#                    md_bg_color: "#ABB2B9"
                     pos_hint: {'left': 1}
                     size_hint: (1,0.7)
+                    color: "grey"
                     on_press: app.show_screen('register')
 
-                MDRaisedButton:
+                MDTextButton:
                     text: 'Guest log in'
-                    md_bg_color: "#ABB2B9"
+#                    md_bg_color: "#ABB2B9"
                     pos_hint: {'right': 1}
                     size_hint: (1,0.7)
+                    color: "grey"
                     on_press: root.guestLogin()
 
 

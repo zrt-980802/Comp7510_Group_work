@@ -19,7 +19,7 @@
             color: "black"
             pos: dp(5), dp(60)
             bold: True
-            font_style: 'H6'
+#            font_style: 'H6'
             font_size: 35
 
         SearchMDLabel:
@@ -28,7 +28,7 @@
             color: "grey"
             pos: dp(12), dp(12)
             bold: True
-            font_style: 'Body1'
+#            font_style: 'Body1'
             font_size: 20
 
 
@@ -37,22 +37,11 @@
     name: 'SearchScreen'
     RecycleView:
         scroll_y: 0.5
-
+        pos_hint: {"center_x": .5, "center_y": .4}
         Column:
             id: searchResult
             adaptive_height: True
             spacing: "16dp"
-            AsyncImage:
-#                source: 'source/pic/main_hello.jpg'
-                size_hint: None, None
-                size: dp(250), dp(50)
-                canvas:
-                    Color:
-                        rgba: 1,1,1,1
-                    Rectangle:
-                        texture: self.texture
-                        size: self.width, self.height
-                        pos: self.pos
 
 
     Column:
@@ -71,7 +60,7 @@
                     pos_hint: {"center_y": .9}
                     pos:  - self.width*2- dp(8), 0
                     theme_text_color: "Hint"
-                    on_release: app.go_back()
+                    on_release: root.quit()
                 SearchMDTextField:
                     id: searchTextField
                     hint_text: "Enter keyword"

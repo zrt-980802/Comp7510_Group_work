@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+"""
+@Time ： 2023/10/11 14:08
+@Auth ： Andong
+@File ：LoginScreen.py
+@IDE ：PyCharm
+@Motto：ABC(Always Be Coding)
+"""
+
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.dialog import MDDialog

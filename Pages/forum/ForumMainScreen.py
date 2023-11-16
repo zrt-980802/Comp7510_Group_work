@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+@Time ： 2023/10/31 13:35
+@Auth ： Andong
+@File ：ForumMainScreen.py
+@IDE ：PyCharm
+@Motto：ABC(Always Be Coding)
+"""
 from kivy.metrics import dp
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import Screen
@@ -24,9 +32,9 @@ class MD3Card(MDCard):
 
 
 def ifTooLong(content, isTitle=False):
-    changeSize = 55
+    changeSize = 50
     if isTitle is True:
-        changeSize = 30
+        changeSize = 26
     if len(content) > changeSize:
         content = content[0:changeSize] + '...'
     return content
@@ -105,6 +113,7 @@ class ForumMainScreen(Screen):
         self.menu = None
         self.menuAndLoginNameLoad()
         self.listOfPostLoad()
+        print('show main page')
 
     def callback(self, button):
         self.menu.caller = button

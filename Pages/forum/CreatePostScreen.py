@@ -54,14 +54,15 @@ class CreatePostScreen(Screen):
         newPost.post_create_time_num = NowTime.nowNum()
         newPost.post_creator_user_id = userInfo.user_id
 
-        if (path != '' or path != 'File Path' or path is not None) and os.path.exists(path):
+        if (path != '' and path != 'File Path' and path is not None) and os.path.exists(path):
             try:
                 newPost.post_annex = Data.uploadFile(path)
             except Exception:
                 newPost.post_annex = None
         else:
             self.deleteAnnex()
-            self.show_dialog('wrong', 'Invalid file address')
+            if not os.path.exists(path):
+                self.show_dialog('wrong', 'Invalid file address')
 
         try:
             Data.setInfo(newPost)

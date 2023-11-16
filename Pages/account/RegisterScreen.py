@@ -111,9 +111,7 @@ class RegisterScreen(Screen):
             appData.app.go_back()
 
     def cancel(self):
-        print("CANCEL")
-        self.clear()
-        pass
+        appData.app.go_back()
 
     def clear(self):
         for index in self.ids:
