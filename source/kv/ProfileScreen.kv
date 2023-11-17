@@ -24,28 +24,28 @@
                 source: "source/pic/avatar_test.png"
 
     MDLabel:
-        id: userName
+        id: user_name_field
         text: ''
         font_name: 'myFont'
         font_size: 40
         pos_hint: {"center_x": .7, "center_y": .5}
 
     MDLabel:
-        id: userNickName
+        id: user_nick_name_field
         text: ''
         font_name: 'myFont'
         font_size: 40
         pos_hint: {"center_x": .7, "center_y": .44}
 
     MDLabel:
-        id: userPhoneNumber
+        id: user_phone_number_field
         text: ''
         font_name: 'myFont'
         font_size: 40
         pos_hint: {"center_x": .7, "center_y": .38}
 
     MDLabel:
-        id: userEmail
+        id: user_email_field
         text: ''
         font_name: 'myFont'
         font_size: 40
@@ -56,4 +56,4 @@
         md_bg_color: "#42A5F5"
         pos_hint: {"center_x": .5, "center_y": .23}
         size_hint: (0.1, 0.06)
-        on_press: root.jumpToUpdate()
+        on_press: root.jumpToEdit()

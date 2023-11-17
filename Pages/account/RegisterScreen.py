@@ -48,7 +48,7 @@ class RegisterScreen(Screen):
         if counter >= 3:
             return [False, 'Password must contain at least 2 kinds of characters']
 
-        return [True, 'No problem']
+        return [True, 'Password OK']
 
     def emailChecker(self, email):
         regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'

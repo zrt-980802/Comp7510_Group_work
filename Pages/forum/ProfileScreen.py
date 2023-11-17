@@ -13,12 +13,12 @@ class ProfileScreen(Screen):
     def quit(self):
         appData.app.go_back()
 
-    def jumpToUpdate(self):
-        appData.app.show_screen('updateProfile')
+    def jumpToEdit(self):
+        appData.app.show_screen('editProfile')
         appData.editProfileScreen.getProfile()
 
     def getProfile(self):
-        self.ids.userName.text = 'Username: ' + appData.userInfo.user_name
-        self.ids.userNickName.text = 'Nickname: ' + appData.userInfo.user_nick_name
-        self.ids.userPhoneNumber.text = 'Phone Number: ' + appData.userInfo.user_phone_number
-        self.ids.userEmail.text = 'E-mail: ' + appData.userInfo.user_email
+        self.ids.user_name_field.text = 'Username: ' + appData.userInfo.user_name
+        self.ids.user_nick_name_field.text = 'Nickname: ' + appData.userInfo.user_nick_name
+        self.ids.user_phone_number_field.text = 'Phone Number: ' + appData.userInfo.user_phone_number
+        self.ids.user_email_field.text = 'E-mail: ' + appData.userInfo.user_email

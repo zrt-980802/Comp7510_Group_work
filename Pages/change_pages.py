@@ -92,7 +92,7 @@ class MyApp(MDApp):
         screenManager.add_widget(myPostScreen)
         profileScreen = ProfileScreen(name='profile')
         screenManager.add_widget(profileScreen)
-        editProfileScreen = EditProfileScreen(name='updateProfile')
+        editProfileScreen = EditProfileScreen(name='editProfile')
         screenManager.add_widget(editProfileScreen)
 
         appData.postScreen = postScreen

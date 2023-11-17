@@ -14,7 +14,7 @@ class EditProfileScreen(Screen):
         appData.app.go_back()
 
     def getProfile(self):
-        self.ids.userName.text = appData.userInfo.user_name
-        self.ids.userNickName.text = appData.userInfo.user_nick_name
-        self.ids.userPhoneNumber.text = appData.userInfo.user_phone_number
-        self.ids.userEmail.text = appData.userInfo.user_email
+        self.ids.user_name_field.text = appData.userInfo.user_name
+        self.ids.user_nick_name_field.text = appData.userInfo.user_nick_name
+        self.ids.user_phone_number_field.text = appData.userInfo.user_phone_number
+        self.ids.user_email_field.text = appData.userInfo.user_email
