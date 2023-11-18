@@ -113,8 +113,7 @@ class ForumMainScreen(Screen):
     def on_start(self):
         self.menu = None
         self.menuAndLoginNameLoad()
-        self.listOfPostLoad()
-        print('show main page')
+        self.reload()
 
     def callback(self, button):
         self.menu.caller = button
