@@ -93,7 +93,6 @@ class RegisterScreen(Screen):
         infoList = self.checkRegisterInfo()
         if not infoList[0]:
             self.show_dialog(infoList[1], infoList[2])
-            print('register info is not correct!')
         else:
             self.show_dialog(infoList[1], infoList[2])
             userInfo = UserInfo()

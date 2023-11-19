@@ -13,6 +13,7 @@ from Pages.forum.SearchScreen import SearchScreen
 from Pages.forum.PostScreen import PostScreen
 from Pages.account.ProfileScreen import ProfileScreen
 from Pages.account.EditProfileScreen import EditProfileScreen
+from Pages.account.ChangePasswordScreen import ChangePasswordScreen
 
 from kivy.core.text import LabelBase
 from kivy.core.window import Window
@@ -75,6 +76,7 @@ class MyApp(MDApp):
         Builder.load_file('source/kv/MyPostScreen.kv')
         Builder.load_file('source/kv/ProfileScreen.kv')
         Builder.load_file('source/kv/EditProfileScreen.kv')
+        Builder.load_file('source/kv/ChangePasswordScreen.kv')
 
         screenManager = ScreenManager()
         screenManager.add_widget(LoginScreen(name='login'))
@@ -94,6 +96,8 @@ class MyApp(MDApp):
         screenManager.add_widget(profileScreen)
         editProfileScreen = EditProfileScreen(name='editProfile')
         screenManager.add_widget(editProfileScreen)
+        changePasswordScreen = ChangePasswordScreen(name='changePassword')
+        screenManager.add_widget(changePasswordScreen)
 
         appData.postScreen = postScreen
         appData.forumMainScreen = forumMainScreen
@@ -103,6 +107,7 @@ class MyApp(MDApp):
         appData.myPostScreen = myPostScreen
         appData.profileScreen = profileScreen
         appData.editProfileScreen = editProfileScreen
+        appData.changePasswordScreen = changePasswordScreen
         return screenManager
 
 
