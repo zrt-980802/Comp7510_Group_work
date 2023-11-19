@@ -19,6 +19,7 @@ class ProfileScreen(Screen):
 
     def jumpToChangePassword(self):
         appData.app.show_screen('changePassword')
+        appData.changePasswordScreen.clear()
 
     def getProfile(self):
         self.ids.user_name_field.text = 'Username: ' + appData.userInfo.user_name

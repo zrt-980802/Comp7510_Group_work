@@ -71,3 +71,7 @@ class ChangePasswordScreen(Screen):
             userInfo.user_password = str(desEncrypt(self.ids.new_password_field.text))
             Data.updateInfo(userInfo)
             appData.app.go_back()
+
+    def clear(self):
+        for index in self.ids:
+            self.ids[index].text = ""
