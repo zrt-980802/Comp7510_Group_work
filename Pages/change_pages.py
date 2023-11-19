@@ -11,8 +11,8 @@ from Pages.forum.ForumMainScreen import ForumMainScreen
 from Pages.forum.MyPostScreen import MyPostScreen
 from Pages.forum.SearchScreen import SearchScreen
 from Pages.forum.PostScreen import PostScreen
-from Pages.forum.ProfileScreen import ProfileScreen
-from Pages.forum.EditProfileScreen import EditProfileScreen
+from Pages.account.ProfileScreen import ProfileScreen
+from Pages.account.EditProfileScreen import EditProfileScreen
 
 from kivy.core.text import LabelBase
 from kivy.core.window import Window
