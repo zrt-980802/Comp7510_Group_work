@@ -22,42 +22,45 @@
                 size: 240, 240
                 pos: self.pos
                 source: "source/pic/avatar_test.png"
+    MDFloatLayout:
+        size_hint_x: 0.8
+        size_hint_y: 0.7
+        pos_hint: {"center_x": .5, "center_y": .5}
+        MDTextField:
+            id: user_name_field
+            text: ''
+            hint_text: 'New Username'
+            font_name: 'myFont'
+            font_size: 30
+            pos_hint: {"center_x": .5, "center_y": .6}
 
-    MDTextField:
-        id: user_name_field
-        text: ''
-        hint_text: 'New Username'
-        font_name: 'myFont'
-        font_size: 40
-        pos_hint: {"center_x": .7, "center_y": .5}
+        MDTextField:
+            id: user_nick_name_field
+            text: ''
+            hint_text: 'New Nickname'
+            font_name: 'myFont'
+            font_size: 30
+            pos_hint: {"center_x": .5, "center_y": .5}
 
-    MDTextField:
-        id: user_nick_name_field
-        text: ''
-        hint_text: 'New Nickname'
-        font_name: 'myFont'
-        font_size: 40
-        pos_hint: {"center_x": .7, "center_y": .42}
+        MDTextField:
+            id: user_phone_number_field
+            text: ''
+            hint_text: 'New Phone Number'
+            font_name: 'myFont'
+            font_size: 30
+            pos_hint: {"center_x": .5, "center_y": .4}
 
-    MDTextField:
-        id: user_phone_number_field
-        text: ''
-        hint_text: 'New Phone Number'
-        font_name: 'myFont'
-        font_size: 40
-        pos_hint: {"center_x": .7, "center_y": .34}
+        MDTextField:
+            id: user_email_field
+            text: ''
+            hint_text: 'New Email'
+            font_name: 'myFont'
+            font_size: 30
+            pos_hint: {"center_x": .5, "center_y": .3}
 
-    MDTextField:
-        id: user_email_field
-        text: ''
-        hint_text: 'New Email'
-        font_name: 'myFont'
-        font_size: 40
-        pos_hint: {"center_x": .7, "center_y": .26}
-
-    MDRaisedButton:
-        text: "Save"
-        md_bg_color: "#42A5F5"
-        pos_hint: {"center_x": .5, "center_y": .16}
-        size_hint: (0.1, 0.06)
-        on_press: root.updateProfile()
+        MDRaisedButton:
+            text: "Save"
+            md_bg_color: "#42A5F5"
+            pos_hint: {"center_x": .5, "center_y": .16}
+            size_hint: (0.1, 0.06)
+            on_press: root.updateProfile()

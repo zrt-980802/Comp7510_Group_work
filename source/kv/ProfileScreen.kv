@@ -22,45 +22,48 @@
                 size: 240, 240
                 pos: self.pos
                 source: "source/pic/avatar_test.png"
+    MDFloatLayout:
+        size_hint_x: 1.0
+        size_hint_y: 0.8
+        pos_hint: {"center_x": .5, "center_y": .5}
+        MDLabel:
+            id: user_name_field
+            text: ''
+            font_name: 'myFont'
+            font_size: 30
+            pos_hint: {"center_x": .55, "center_y": .5}
 
-    MDLabel:
-        id: user_name_field
-        text: ''
-        font_name: 'myFont'
-        font_size: 40
-        pos_hint: {"center_x": .7, "center_y": .5}
+        MDLabel:
+            id: user_nick_name_field
+            text: ''
+            font_name: 'myFont'
+            font_size: 30
+            pos_hint: {"center_x": .55, "center_y": .44}
 
-    MDLabel:
-        id: user_nick_name_field
-        text: ''
-        font_name: 'myFont'
-        font_size: 40
-        pos_hint: {"center_x": .7, "center_y": .44}
+        MDLabel:
+            id: user_phone_number_field
+            text: ''
+            font_name: 'myFont'
+            font_size: 30
+            pos_hint: {"center_x": .55, "center_y": .38}
 
-    MDLabel:
-        id: user_phone_number_field
-        text: ''
-        font_name: 'myFont'
-        font_size: 40
-        pos_hint: {"center_x": .7, "center_y": .38}
+        MDLabel:
+            id: user_email_field
+            text: ''
+            font_name: 'myFont'
+            font_size: 30
+            pos_hint: {"center_x": .55, "center_y": .32}
 
-    MDLabel:
-        id: user_email_field
-        text: ''
-        font_name: 'myFont'
-        font_size: 40
-        pos_hint: {"center_x": .7, "center_y": .32}
+        MDRaisedButton:
+            text: "Edit"
+            md_bg_color: "#42A5F5"
+            pos_hint: {"center_x": .5, "center_y": .23}
+            size_hint: (0.1, 0.06)
+            on_press: root.jumpToEdit()
 
-    MDRaisedButton:
-        text: "Edit"
-        md_bg_color: "#42A5F5"
-        pos_hint: {"center_x": .5, "center_y": .23}
-        size_hint: (0.1, 0.06)
-        on_press: root.jumpToEdit()
-
-    MDRaisedButton:
-        text: "Change password"
-        md_bg_color: "#42A5F5"
-        pos_hint: {"center_x": .5, "center_y": .14}
-        size_hint: (0.1, 0.06)
-        on_press: root.jumpToChangePassword()
+        MDRaisedButton:
+            text: "Change password"
+            md_bg_color: "#42A5F5"
+            pos_hint: {"center_x": .5, "center_y": .14}
+            size_hint: (0.1, 0.06)
+            on_press: root.jumpToChangePassword()

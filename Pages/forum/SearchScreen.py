@@ -40,6 +40,7 @@ class SearchScreen(Screen):
     def quit(self):
         # clear
         self.ids.searchResult.clear_widgets()
+        self.ids.searchTextField.text = ''
         appData.app.go_back()
 
     def search(self):
