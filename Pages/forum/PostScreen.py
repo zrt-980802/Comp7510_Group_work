@@ -106,8 +106,6 @@ class PostScreen(Screen):
             shadow_softness=2,
             shadow_offset=(0, 2)
         )
-        self.ids.postAndComment.add_widget(postCard)
-
         if postInfo.post_annex is not None:
             print(postInfo.post_annex)
             postCard.add_widget(
@@ -118,6 +116,9 @@ class PostScreen(Screen):
 
                 )
             )
+        self.ids.postAndComment.add_widget(postCard)
+
+
         for item in commentData:
             count += 1
             style = None

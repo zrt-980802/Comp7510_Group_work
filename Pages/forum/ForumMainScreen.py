@@ -138,8 +138,12 @@ class ForumMainScreen(Screen):
             else:
                 self.show_dialog('Not logged in', 'Please sign in')
         if button == MenuListName[5]:
-            appData.app.show_screen('profile')
-            appData.profileScreen.getProfile()
+            if CI.checkLogin():
+                appData.app.show_screen('profile')
+                appData.profileScreen.getProfile()
+            else:
+                self.show_dialog('Not logged in', 'Please sign in')
+
         self.menu.dismiss()
 
     def show_dialog(self, title, text):

@@ -2,6 +2,8 @@ import logging
 
 import certifi
 import os
+os.environ['KIVY_IMAGE'] = 'pil,sdl2'
+os.environ['SSL_CERT_FILE'] = certifi.where()
 
 from Pages.account.LoginScreen import LoginScreen
 from Pages.account.RegisterScreen import RegisterScreen
@@ -26,12 +28,12 @@ import EndPoint.CheckInfo as CI
 
 from Tools.Global import appData
 
-os.environ['SSL_CERT_FILE'] = certifi.where()
+
 
 ch = logging.StreamHandler()
 ch.setLevel(logging.WARNING)
 
-# 记得修改尺寸
+
 if platform in ('win', 'macosx'):
     Window.size = (414, 736)
 
